@@ -29,6 +29,14 @@ echo '
                         </span>
                     </a>
                 </li>
+                <li class="sidebar-item"> 
+                    <a class="sidebar-link" href="test.php" aria-expanded="false">
+                        <i data-feather="file-text" class="feather-icon"></i>
+                        <span class="hide-menu">
+                            Tests
+                        </span>
+                    </a>
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="transaction_history.php" aria-expanded="false">
                         <i data-feather="file-text" class="feather-icon"></i>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include "session.php"; ?> 
+<?php include "session.php"; ?>
 <html dir="ltr" lang="en">
 
 <head>
@@ -21,7 +21,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-</head>    
+</head>
 
 <body>
     <!-- ============================================================== -->
@@ -36,7 +36,8 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -65,8 +66,10 @@
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-muted">Dashboard</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Transaction History</li>
+                                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-muted">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Transaction
+                                        History</li>
                                 </ol>
                             </nav>
                         </div>
@@ -98,10 +101,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                             
+
 
                                 <div class="table-responsive">
-                                
+
                                     <table id="zero_config" class="table table-striped table-bordered no-wrap">
                                         <thead>
                                             <tr>
@@ -109,49 +112,47 @@
                                                 <th>Phone Number</th>
                                                 <th>Description</th>
                                                 <th>Amount</th>
-                                                <th>Transaction Date</th>            
+                                                <th>Transaction Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php
-                include 'connect.php'; // Include database connection
+                                            <?php
+                                            include 'connect.php'; // Include database connection
+                                            
+                                            // Ensure $class, $term, and $username are set
+                                            if (isset($class, $term, $user_name)) {
 
-                // Ensure $class, $term, and $username are set
-                if (isset($class, $term, $user_name)) {
+                                                $class = trim($class);
+                                                $term = trim($term);
+                                                $user_name = trim($user_name);
 
-                    $class = trim($class);
-                    $term = trim($term);
-                    $user_name = trim($user_name);
-                                
-                    // Fetch subjects from the database
-                    $query = "SELECT phoneNumber, description, amount, transaction_date FROM transactions 
+                                                // Fetch subjects from the database
+                                                $query = "SELECT phoneNumber, description, amount, transaction_date FROM transactions 
                             WHERE TRIM(username)='$user_name' order by id desc";
-                    $result = $conn->query($query);
+                                                $result = $conn->query($query);
 
-                  
+                                                if ($result === false) {
+                                                    echo "Error: " . $conn->error; // Display SQL error if any
+                                                }
+                                            }
 
-                    if ($result === false) {
-                        echo "Error: " . $conn->error; // Display SQL error if any
-                    }
-                }
-               
-        if (isset($result) && $result->num_rows > 0) {
-            $no = 1; // Row counter
-            while ($row = $result->fetch_assoc()) {
-             
-                echo "<tr>";
-                echo "<td>{$no}</td>";
-                echo "<td>{$row['phoneNumber']}</td>";
-                echo "<td>{$row['description']}</td>";
-                echo "<td>{$row['amount']}</td>";
-                echo "<td>{$row['transaction_date']}</td>";
-                echo "</tr>";
-                $no++;
-            }
-        } else {
-            echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
-        }
-        ?>
+                                            if (isset($result) && $result->num_rows > 0) {
+                                                $no = 1; // Row counter
+                                                while ($row = $result->fetch_assoc()) {
+
+                                                    echo "<tr>";
+                                                    echo "<td>{$no}</td>";
+                                                    echo "<td>{$row['phoneNumber']}</td>";
+                                                    echo "<td>{$row['description']}</td>";
+                                                    echo "<td>{$row['amount']}</td>";
+                                                    echo "<td>{$row['transaction_date']}</td>";
+                                                    echo "</tr>";
+                                                    $no++;
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
+                                            }
+                                            ?>
                                         </tbody>
                                         <!-- <tfoot>
                                             <tr>
@@ -189,8 +190,8 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <?php include 'footer.php';  ?>
-         
+            <?php include 'footer.php'; ?>
+
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
