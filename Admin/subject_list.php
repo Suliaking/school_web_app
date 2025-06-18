@@ -204,11 +204,7 @@
                                                 <th>No</th>
                                                 <th>Subject</th>
                                                 <th>Class</th>
-                                                <th>Term</th>
-                                                <th>Score</th>
-                                                <th>Total Score</th>
                                                 <th>Action</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -222,11 +218,9 @@
                                                 $user_name = trim($user_name);
 
                                                 // Fetch subjects from the database
-                                                $query = "SELECT id,subject, class, score, totalScore FROM createsubject 
-                            WHERE TRIM(class)='$class' AND TRIM(username)='$user_name'";
+                                                $query = "SELECT id, subjectName, class FROM student_subject 
+                                                WHERE TRIM(class)='$class'";
                                                 $result = $conn->query($query);
-
-
 
                                                 if ($result === false) {
                                                     echo "Error: " . $conn->error; // Display SQL error if any
@@ -239,11 +233,8 @@
 
                                                     echo "<tr>";
                                                     echo "<td>{$no}</td>";
-                                                    echo "<td>{$row['subject']}</td>";
+                                                    echo "<td>{$row['subjectName']}</td>";
                                                     echo "<td>{$row['class']}</td>";
-                                                    echo "<td>{$row['term']}</td>";
-                                                    echo "<td>{$row['score']}</td>";
-                                                    echo "<td>{$row['totalScore']}</td>";
                                                     echo "<td><a href='deleteSubject.php?id={$row['id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this?\")'>Delete</a></td>";
                                                     echo "</tr>";
                                                     $no++;

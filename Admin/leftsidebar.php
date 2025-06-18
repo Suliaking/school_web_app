@@ -28,6 +28,12 @@ echo '
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="subject_list.php" aria-expanded="false">
+                        <i data-feather="home" class="feather-icon"></i>
+                        <span class="hide-menu">Create Questions</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="services.php" aria-expanded="false">
                         <i data-feather="briefcase" class="feather-icon"></i>
                         <span class="hide-menu">
