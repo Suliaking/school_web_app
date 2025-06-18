@@ -22,7 +22,7 @@
       </a>
       <ul class="links">
         <li><a href="#">Home</a></li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="#about_us">About Us</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#info">Info</a></li>
         <li class="dropdown">
@@ -38,7 +38,7 @@
 
   <!-- End Landing Page -->
 
-  <div class="content">
+  <div class="content" id="about_us">
     <div class="container">
     <div class="info">
   <h1>About Our School</h1>

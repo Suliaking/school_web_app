@@ -168,7 +168,7 @@
                                                             <label class="input-group-text"
                                                                 for="inputGroupSelect01">Subject</label>
                                                             <select class="form-select" name="subject" id="inputGroupSelect01">
-                                                                <option selected="" disabled>Add subject</option>
+                                                                <option selected="" disabled>Create Subject</option>
                                                                 <?php
                                                                 // Loop through each subject and create an option
                                                                 while ($row = $result->fetch_assoc()) {
@@ -246,30 +246,7 @@
         }
         ?>
                                         </tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                            <th>No</th>
-                                                <th>Subject</th>
-                                                <th>Class</th>
-                                                <th>Term</th>
-                                                <th>Score</th>
-                                                <th>Total Score</th>
-                                            </tr>
-                                        </tfoot> -->
                                     </table>
-                                    <!-- <ul class="pagination float-end">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
-                                    </ul> -->
                                 </div>
                             </div>
                         </div>

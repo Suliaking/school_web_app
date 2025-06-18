@@ -32,9 +32,9 @@
                 </a>
                 <ul class="links">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Work</a></li>
-                    <li><a href="#">Info</a></li>
+                    <li><a href="index.php#about_us">About Us</a></li>
+                    <li><a href="index.php#gallery">Gallery</a></li>
+                    <li><a href="index.php#info">Info</a></li>
                     <!-- Dropdown Menu -->
                     <li class="dropdown">
                         <span class="dropdown-toggle">Login ▾</span>
