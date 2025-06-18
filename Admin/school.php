@@ -30,7 +30,7 @@
             </a>
             <ul class="links">
                 <li><a href="../index.php">Home</a></li>
-                <li><a href="../index.php#">About Us</a></li>
+                <li><a href="../index.php#about_us">About Us</a></li>
                 <li><a href="../index.php#gallery">Gallery</a></li>
                 <li><a href="../index.php#info">Info</a></li>
                 <!-- Dropdown Menu -->
