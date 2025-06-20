@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/king-school.png">
-    <title></title>
+    <title>Student Dashboard - Services</title>
     <!-- This page css -->
     <!-- Custom CSS -->
     <link href="src/dist/css/style.min.css" rel="stylesheet">

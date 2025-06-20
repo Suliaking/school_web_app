@@ -15,7 +15,7 @@ echo '
                 <li class="list-divider"></li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="student.php" aria-expanded="false">
-                        <i data-feather="tag" class="feather-icon"></i>
+                        <i data-feather="user" class="feather-icon"></i>
                         <span class="hide-menu">
                             Students
                         </span>
@@ -25,12 +25,6 @@ echo '
                     <a class="sidebar-link sidebar-link" href="subject_list.php" aria-expanded="false">
                         <i data-feather="home" class="feather-icon"></i>
                         <span class="hide-menu">Create Subjects</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="subject_list.php" aria-expanded="false">
-                        <i data-feather="home" class="feather-icon"></i>
-                        <span class="hide-menu">Create Questions</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -49,18 +43,18 @@ echo '
                         </span>
                     </a>
                 </li>
+                <li class="list-divider"></li>
                 <li class="sidebar-item">
                     <a class="sidebar-link sidebar-link" href="logout.php" aria-expanded="false">
-                        <i data-feather="log-out" class="feather-icon"></i>
-                        <span class="hide-menu">Logout</span>
+                        <i data-feather="log-out" style="color: red;" class="feather-icon"></i>
+                        <span class="hide-menu" style="color: red;">Logout</span>
                     </a>
                 </li>
-            </li>
-        </ul>
-    </nav>
-    <!-- End Sidebar navigation -->
-</div>
-<!-- End Sidebar scroll-->
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
 </aside>
 ';
 

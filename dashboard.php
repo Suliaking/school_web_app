@@ -12,13 +12,14 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Freedash Template - The Ultimate Multipurpose admin template</title>
+    <title>King School</title>
     <!-- Custom CSS -->
     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="src/dist/css/style.min.css" rel="stylesheet">
+    <link href="src/dist/css/style.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -80,26 +81,15 @@
                                 $time_of_day = "Evening";
                             }
                             ?>
-
                             Good <?php echo $time_of_day . ' ' . $username; ?>!
                         </h3>
+
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a>
-                                    </li>
+                                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                                 </ol>
                             </nav>
-                        </div>
-                    </div>
-                    <div class="col-5 align-self-center">
-                        <div class="customize-input float-end">
-                            <select
-                                class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 23</option>
-                                <option value="1">July 23</option>
-                                <option value="2">Jun 23</option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -107,6 +97,8 @@
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
+
+            <!-- Optional: Auto-slide script if you want to control timing -->
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
@@ -122,10 +114,11 @@
                                     <div>
                                         <div class="d-inline-flex align-items-center">
                                             <h2 class="text-dark mb-1 font-weight-medium">
-                                            <?php echo number_format($airtimeBalance, 2); ?>
+                                                <?php echo number_format($airtimeBalance, 2); ?>
                                             </h2>
                                         </div>
-                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Airtime Balance
+                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Airtime
+                                            Balance
                                         </h6>
                                     </div>
                                     <div class="ms-auto mt-md-3 mt-lg-0">
@@ -142,10 +135,10 @@
                                     <div>
                                         <div class="d-inline-flex align-items-center">
                                             <h2 class="text-dark mb-1 font-weight-medium">
-                                            <label class="form-label mb-0">
-                                             ₦<?php echo number_format($walletBalance, 2); ?>
-                                            </label>
-                                            </h2>                                            
+                                                <label class="form-label mb-0">
+                                                    ₦<?php echo number_format($walletBalance, 2); ?>
+                                                </label>
+                                            </h2>
                                         </div>
                                         <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
                                             Balance
@@ -166,7 +159,7 @@
                                         <div class="d-inline-flex align-items-center">
                                             <h2 class="text-dark mb-1 font-weight-medium">
                                                 <?php echo $class; ?>
-                                            </h2>                                   
+                                            </h2>
                                         </div>
                                         <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Class
                                         </h6>
@@ -184,7 +177,7 @@
                                 <div class="d-flex align-items-center">
                                     <div>
                                         <h2 class="text-dark mb-1 font-weight-medium">
-                                        <?php echo $term; ?>
+                                            <?php echo $term; ?>
                                         </h2>
                                         <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Term</h6>
                                     </div>
@@ -199,149 +192,158 @@
                 <!-- *************************************************************** -->
                 <!-- End First Cards -->
                 <!-- *************************************************************** -->
-                <!-- *************************************************************** -->
-                <!-- Start Sales Charts Section -->
-                <!-- *************************************************************** -->
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
+                <!-- ============================================================== -->
+                <!-- Quote Carousel Section -->
+                <!-- ============================================================== -->
+                <div class="row mt-3">
+                    <div class="col-md-6 offset-md-3"> <!-- Centered in page -->
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Total Sales</h4>
-                                <div id="campaign-v2" class="mt-2" style="height:283px; width:100%;"></div>
-                                <ul class="list-style-none mb-0">
-                                    <li>
-                                        <i class="fas fa-circle text-primary font-10 me-2"></i>
-                                        <span class="text-muted">Direct Sales</span>
-                                        <span class="text-dark float-end font-weight-medium">$2346</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-danger font-10 me-2"></i>
-                                        <span class="text-muted">Referral Sales</span>
-                                        <span class="text-dark float-end font-weight-medium">$2108</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-cyan font-10 me-2"></i>
-                                        <span class="text-muted">Affiliate Sales</span>
-                                        <span class="text-dark float-end font-weight-medium">$1204</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Net Income</h4>
-                                <div class="net-income mt-4 position-relative" style="height:294px;"></div>
-                                <ul class="list-inline text-center mt-5 mb-2">
-                                    <li class="list-inline-item text-muted fst-italic">Sales for this month</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Earning by Location</h4>
-                                <div class="" style="height:180px">
-                                    <div id="visitbylocate" style="height:100%"></div>
-                                </div>
-                                <div class="row mb-3 align-items-center mt-1 mt-5">
-                                    <div class="col-4 text-end">
-                                        <span class="text-muted font-14">India</span>
-                                    </div>
-                                    <div class="col-5">
-                                        <div class="progress" style="height: 5px;">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <h5 class="card-title text-center mb-3">Quote of the Moment</h5>
+                                <div id="quoteCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                                    <div class="carousel-inner text-center">
+                                        <div class="carousel-item active">
+                                            <blockquote class="blockquote">
+                                                <p>"Education is the most powerful weapon which you can use to change
+                                                    the
+                                                    world."</p>
+                                                <footer class="blockquote-footer mt-2">Nelson Mandela</footer>
+                                            </blockquote>
                                         </div>
-                                    </div>
-                                    <div class="col-3 text-end">
-                                        <span class="mb-0 font-14 text-dark font-weight-medium">28%</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-4 text-end">
-                                        <span class="text-muted font-14">UK</span>
-                                    </div>
-                                    <div class="col-5">
-                                        <div class="progress" style="height: 5px;">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 74%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="carousel-item">
+                                            <blockquote class="blockquote">
+                                                <p>"The expert in anything was once a beginner."</p>
+                                                <footer class="blockquote-footer mt-2">Helen Hayes</footer>
+                                            </blockquote>
                                         </div>
-                                    </div>
-                                    <div class="col-3 text-end">
-                                        <span class="mb-0 font-14 text-dark font-weight-medium">21%</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-4 text-end">
-                                        <span class="text-muted font-14">USA</span>
-                                    </div>
-                                    <div class="col-5">
-                                        <div class="progress" style="height: 5px;">
-                                            <div class="progress-bar bg-cyan" role="progressbar" style="width: 60%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="carousel-item">
+                                            <blockquote class="blockquote">
+                                                <p>"Success is not final, failure is not fatal: It is the courage to
+                                                    continue that counts."</p>
+                                                <footer class="blockquote-footer mt-2">Winston Churchill</footer>
+                                            </blockquote>
                                         </div>
-                                    </div>
-                                    <div class="col-3 text-end">
-                                        <span class="mb-0 font-14 text-dark font-weight-medium">18%</span>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center">
-                                    <div class="col-4 text-end">
-                                        <span class="text-muted font-14">China</span>
-                                    </div>
-                                    <div class="col-5">
-                                        <div class="progress" style="height: 5px;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="carousel-item">
+                                            <blockquote class="blockquote">
+                                                <p>"Believe you can and you're halfway there."</p>
+                                                <footer class="blockquote-footer mt-2">Theodore Roosevelt</footer>
+                                            </blockquote>
                                         </div>
-                                    </div>
-                                    <div class="col-3 text-end">
-                                        <span class="mb-0 font-14 text-dark font-weight-medium">12%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End Quote Carousel Section -->
+                <!-- ============================================================== -->
                 <!-- *************************************************************** -->
-                <!-- End Sales Charts Section -->
+                <!-- Start Upcoming Events & Exams Section -->
                 <!-- *************************************************************** -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Upcoming Events & Exams</h4>
+                                <div class="row">
+                                    <!-- Event 1 -->
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card border shadow-sm h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Mathematics Exam</h5>
+                                                <p class="card-text">
+                                                    <strong>Date:</strong> June 25, 2025<br>
+                                                    <strong>Time:</strong> 9:00 AM<br>
+                                                    <strong>Class:</strong> Grade-5 to Grade-13
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Event 2 -->
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card border shadow-sm h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Science Fair</h5>
+                                                <p class="card-text">
+                                                    <strong>Date:</strong> June 28, 2025<br>
+                                                    <strong>Location:</strong> School Hall<br>
+                                                    <strong>Time:</strong> 11:00 AM
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Event 3 -->
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card border shadow-sm h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">English Literature Test</h5>
+                                                <p class="card-text">
+                                                    <strong>Date:</strong> July 2, 2025<br>
+                                                    <strong>Time:</strong> 10:30 AM<br>
+                                                    <strong>Class:</strong> Grade-5 to Grade-13
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- You can add more event cards as needed -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- *************************************************************** -->
+                <!-- End Upcoming Events & Exams Section -->
+                <!-- *************************************************************** -->
+
                 <!-- *************************************************************** -->
                 <!-- Start Location and Earnings Charts Section -->
                 <!-- *************************************************************** -->
                 <div class="row">
                     <div class="col-md-6 col-lg-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">Earning Statistics</h4>
-                                    <div class="ms-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="#">Insert</a>
-                                                <a class="dropdown-item" href="#">Update</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <div class="pl-4 mb-5">
-                                    <div class="stats ct-charts position-relative" style="height: 315px;"></div>
+                        <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner rounded">
+                                <div class="carousel-item active">
+                                    <img src="assets/images/gallery1.jpg" class="d-block w-100" alt="Slide 1">
                                 </div>
-                                <ul class="list-inline text-center mt-4 mb-0">
-                                    <li class="list-inline-item text-muted fst-italic">Earnings for this month</li>
-                                </ul>
+                                <div class="carousel-item">
+                                    <img src="assets/images/gallery2.jpg" class="d-block w-100" alt="Slide 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/gallery3.jpg" class="d-block w-100" alt="Slide 3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/gallery4.jpg" class="d-block w-100" alt="Slide 3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/gallery5.jpg" class="d-block w-100" alt="Slide 3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/gallery6.jpg" class="d-block w-100" alt="Slide 3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/gallery7.jpg" class="d-block w-100" alt="Slide 3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/gallery8.jpg" class="d-block w-100" alt="Slide 3">
+                                </div>
                             </div>
+
+                            <!-- Controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#imageSlider"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
                         </div>
                     </div>
+
                     <div class="col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
@@ -400,6 +402,90 @@
                 <!-- End Location and Earnings Charts Section -->
                 <!-- *************************************************************** -->
                 <!-- *************************************************************** -->
+                <!-- Start Class Timetable Section -->
+                <!-- *************************************************************** -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Class Timetable</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center align-middle">
+                                        <thead class="bg-primary text-white">
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>Monday</th>
+                                                <th>Tuesday</th>
+                                                <th>Wednesday</th>
+                                                <th>Thursday</th>
+                                                <th>Friday</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>9:00 - 10:00</th>
+                                                <td>Mathematics</td>
+                                                <td>English</td>
+                                                <td>Physics</td>
+                                                <td>Biology</td>
+                                                <td>Civic Education</td>
+                                            </tr>
+                                            <tr>
+                                                <th>10:00 - 11:00</th>
+                                                <td>English</td>
+                                                <td>Biology</td>
+                                                <td>Mathematics</td>
+                                                <td>Chemistry</td>
+                                                <td>Literature</td>
+                                            </tr>
+                                            <tr>
+                                                <th>11:00 - 12:00</th>
+                                                <td>Government</td>
+                                                <td>Geography</td>
+                                                <td>Chemistry</td>
+                                                <td>Physics</td>
+                                                <td>Economics</td>
+                                            </tr>
+                                            <tr class="bg-light">
+                                                <th>12:00 - 1:00</th>
+                                                <td colspan="5"><strong>Break Time</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th>1:00 - 2:00</th>
+                                                <td>Economics</td>
+                                                <td>Literature</td>
+                                                <td>Government</td>
+                                                <td>Mathematics</td>
+                                                <td>English</td>
+                                            </tr>
+                                            <tr>
+                                                <th>2:00 - 3:00</th>
+                                                <td>Biology</td>
+                                                <td>Fine Art</td>
+                                                <td>English</td>
+                                                <td>Geography</td>
+                                                <td>CRS</td>
+                                            </tr>
+                                            <tr>
+                                                <th>3:00 - 4:00</th>
+                                                <td>ICT</td>
+                                                <td>CRS</td>
+                                                <td>ICT</td>
+                                                <td>Fine Art</td>
+                                                <td>French</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- *************************************************************** -->
+                <!-- End Class Timetable Section -->
+                <!-- *************************************************************** -->
+
+                <!-- *************************************************************** -->
                 <!-- Start Top Leader Table -->
                 <!-- *************************************************************** -->
                 <div class="row">
@@ -432,44 +518,45 @@
                                                 </th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">Class
                                                 </th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted">Phone Number</th>
-                                                
-                                             
+                                                <th class="border-0 font-14 font-weight-medium text-muted">Phone Number
+                                                </th>
+
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                
-                                            
+
+
                                                 <?php
-                include 'connect.php'; // Include database connection
+                                                include 'connect.php'; // Include database connection
+                                                
+                                                // Ensure $class, $term, and $username are set
+                                                if (isset($class)) {
 
-                // Ensure $class, $term, and $username are set
-                if (isset($class)) {
+                                                    $class = trim($class);
 
-                    $class = trim($class);
-            
-                                
-                    // Fetch subjects from the database
-                    $query = "SELECT username,first_name,last_name, email,phoneNumber,class,term  FROM register 
+
+                                                    // Fetch subjects from the database
+                                                    $query = "SELECT username,first_name,last_name, email,phoneNumber,class,term  FROM register 
                             WHERE TRIM(class)='$class'";
-                    $result = $conn->query($query);
+                                                    $result = $conn->query($query);
 
-                  
 
-                    if ($result === false) {
-                        echo "Error: " . $conn->error; // Display SQL error if any
-                    }
-                }
-               
-        if (isset($result) && $result->num_rows > 0) {
-            $no = 1; // Row counter
-            while ($row = $result->fetch_assoc()) {
 
-                
-                echo "<tr>";
-                echo "<td>{$no}</td>";
-                echo "<td  class='border-top-0 px-2 py-4'><div class='d-flex no-block align-items-center'>
+                                                    if ($result === false) {
+                                                        echo "Error: " . $conn->error; // Display SQL error if any
+                                                    }
+                                                }
+
+                                                if (isset($result) && $result->num_rows > 0) {
+                                                    $no = 1; // Row counter
+                                                    while ($row = $result->fetch_assoc()) {
+
+
+                                                        echo "<tr>";
+                                                        echo "<td>{$no}</td>";
+                                                        echo "<td  class='border-top-0 px-2 py-4'><div class='d-flex no-block align-items-center'>
                                                         <div class='me-3'><img
                                                                 src='profile_image_upload/{$row['username']}.jpg'
                                                                 alt='user' class='rounded-circle' width='45'
@@ -480,16 +567,16 @@
                                                         </div>
                                                     </div>
                                                     </td>";
-                echo "<td>{$row['class']}</td>";
-                echo "<td>{$row['phoneNumber']}</td>";
-               
-                echo "</tr>";
-                $no++;
-            }
-        } else {
-            echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
-        }
-        ?>
+                                                        echo "<td>{$row['class']}</td>";
+                                                        echo "<td>{$row['phoneNumber']}</td>";
+
+                                                        echo "</tr>";
+                                                        $no++;
+                                                    }
+                                                } else {
+                                                    echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
+                                                }
+                                                ?>
                                         </tbody>
                                         </tbody>
                                     </table>
@@ -510,7 +597,7 @@
             <!-- ============================================================== -->
             <!--profile modal-->
             <?php include 'profilemodal.php'; ?>
- 
+
 
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -519,7 +606,7 @@
         <!-- update Profile Modal -->
         <?php include 'updateprofilemodal.php'; ?>
 
-        <?php include 'wallet.php'; ?>  
+        <?php include 'wallet.php'; ?>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
@@ -550,6 +637,20 @@
     <script src="assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="src/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
+        const switcher = document.getElementById('themeSwitch');
+
+        // Set saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-bs-theme', savedTheme);
+        switcher.checked = savedTheme === 'dark';
+
+        switcher.addEventListener('change', function () {
+            const theme = this.checked ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+    <script>
         //image preview
         document.getElementById("profile-pic-upload").addEventListener("change", function (event) {
             const file = event.target.files[0];
@@ -564,15 +665,21 @@
 
     </script>
     <?php if (isset($_GET['openModal']) && $_GET['openModal'] === 'wallet'): ?>
-<script>
-$(document).ready(function(){
-   
-    $("#wallet-modal").modal('show');
-});
-</script>
-<?php endif; ?>
+        <script>
+            $(document).ready(function () {
 
-
+                $("#wallet-modal").modal('show');
+            });
+        </script>
+    <?php endif; ?>
 </body>
+<script>
+    var quoteCarousel = document.querySelector('#quoteCarousel');
+    var carousel = new bootstrap.Carousel(quoteCarousel, {
+        interval: 5000, // 5 seconds per quote
+        ride: 'carousel',
+        pause: false
+    });
+</script>
 
 </html>

@@ -205,6 +205,7 @@
                                                 <th>Subject</th>
                                                 <th>Class</th>
                                                 <th>Action</th>
+                                                <th>Create Questions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -236,6 +237,7 @@
                                                     echo "<td>{$row['subjectName']}</td>";
                                                     echo "<td>{$row['class']}</td>";
                                                     echo "<td><a href='deleteSubject.php?id={$row['id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this?\")'>Delete</a></td>";
+                                                    echo "<td><a href='questions.php?subjectName={$row['subjectName']}&class={$row['class']}' class='btn btn-primary'>View Questions</a></td>";
                                                     echo "</tr>";
                                                     $no++;
                                                 }

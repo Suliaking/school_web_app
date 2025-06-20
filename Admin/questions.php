@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-<?php include "session.php"; ?>
+<?php include "session.php";
+
+// Check if 'id' is set in the URL
+if (isset($_GET['subjectName'])) {
+    echo $subjectName = $_GET['subjectName'];
+    echo $class = $_GET['class'];
+}
+
+?>
 <html dir="ltr" lang="en">
 
 <head>
@@ -11,7 +19,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/king-school.png">
-    <title>Freedash Template - The Ultimate Multipurpose admin template</title>
+    <title>Create Questions</title>
     <!-- This page css -->
     <!-- Custom CSS -->
     <link href="../src/dist/css/style.min.css" rel="stylesheet">
@@ -62,35 +70,33 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">student</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Questions</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="dashboard.php" class="text-muted">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">student</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Questions</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
-                    <div class="col-5 align-self-center">
-                        <div class="customize-input float-end">
-                            <select
-                                class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 23</option>
-                                <option value="1">July 23</option>
-                                <option value="2">Jun 23</option>
-                            </select>
-                        </div>
-                    </div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#addQuestionModal">
+                        Add New Question
+                    </button>
                 </div>
             </div>
+
+            <!-- Add Question Modal -->
+
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -100,36 +106,29 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
-
                                 <div class="table-responsive">
 
                                     <table id="zero_config" class="table table-striped table-bordered no-wrap">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>name</th>
-                                                <th>email</th>
-                                                <th>phone-number</th>
-                                                <th>class</th>
-                                                <th>term</th>
-
+                                                <th>question</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             include '../connect.php'; // Include database connection
                                             
-                                            // Ensure $class, $term, and $username are set
+                                            // Ensure $class are set
                                             if (isset($class, $user_name)) {
 
                                                 $class = trim($class);
 
                                                 $user_name = trim($user_name);
 
-                                                // Fetch students from the database
-                                                $query = "SELECT username, first_name, last_name, email, phoneNumber, class,term  FROM register 
-                                                WHERE TRIM(class)='$class' order  by first_name asc";
+                                                // Fetch questions from the database
+                                                $query = "SELECT question FROM questions 
+                                                WHERE TRIM(class)='$class'";
                                                 $result = $conn->query($query);
 
                                                 if ($result === false) {
@@ -143,17 +142,12 @@
 
                                                     echo "<tr>";
                                                     echo "<td>{$no}</td>";
-                                                    echo "<td>" . ucwords(strtolower($row['first_name'])) . " " . ucwords(strtolower($row['last_name'])) . "</td>";
-
-                                                    echo "<td>{$row['email']}</td>";
-                                                    echo "<td>{$row['phoneNumber']}</td>";
-                                                    echo "<td>{$row['class']}</td>";
-                                                    echo "<td>{$row['term']}</td>";
+                                                    echo "<td>{$row['question']}</td>";
                                                     echo "</tr>";
                                                     $no++;
                                                 }
                                             } else {
-                                                echo "<tr><td colspan='6' class='text-center'>No data found for student</td></tr>";
+                                                echo "<tr><td colspan='6' class='text-center'>No available questions</td></tr>";
                                             }
                                             ?>
                                         </tbody>
@@ -164,13 +158,14 @@
                     </div>
                 </div>
             </div>
+
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <?php include '../footer.php'; ?>
+            <?php include 'footer.php'; ?>
 
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -180,6 +175,59 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
         <?php include 'profilemodal.php'; ?>
+
+        <?php include 'wallet.php'; ?>
+
+    </div>
+    <div class="modal fade" id="addQuestionModal" tabindex="-1" aria-labelledby="addQuestionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md"> <!-- You can change modal-lg to modal-md or modal-sm -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addQuestionModalLabel">Add New Question</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form action="add_question.php" method="POST">
+                <input type="hidden" class="form-control" name="subject" value="<?php echo $subjectName; ?>"
+                            readonly>
+                        <input type="hidden" class="form-control" name="class" value="<?php echo $class; ?>" readonly>
+                    <div class="modal-body">
+
+        
+
+                        <div class="mb-3">
+                            <label for="question" class="form-label">Question</label>
+                            <textarea class="form-control" name="question" rows="3" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Options</label>
+                            <input type="text" class="form-control mb-2" name="optionA" placeholder="Option A" required>
+                            <input type="text" class="form-control mb-2" name="optionB" placeholder="Option B" required>
+                            <input type="text" class="form-control mb-2" name="optionC" placeholder="Option C" required>
+                            <input type="text" class="form-control mb-2" name="optionD" placeholder="Option D" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="correct_option" class="form-label">Correct Option</label>
+                            <select class="form-select" name="correct_option" required>
+                                <option value="">Select Correct Option</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" name="submit">Add Question</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
