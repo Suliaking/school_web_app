@@ -75,12 +75,8 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                            <select
-                                class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 23</option>
-                                <option value="1">July 23</option>
-                                <option value="2">Jun 23</option>
-                            </select>
+                            <input type="text" class="form-control bg-white border-0 custom-shadow custom-radius"
+                                id="currentMonthYear" readonly>
                         </div>
                     </div>
                 </div>
@@ -89,36 +85,37 @@
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
-            <!-- Container fluid  -->
+            <!-- Container fluid -->
             <!-- ============================================================== -->
             <form action="pay_for_service.php" method="post">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Buy Airtime</h4>
+                <div class="row mt-4">
+                    <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="card shadow-sm border-primary">
+                            <div class="card-body" style="background-color: #e9f5ff;">
+                                <h4 class="card-title text-primary mb-3">Buy Airtime</h4>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="airtime_amount"
+                                    <input type="number" class="form-control border-primary" name="airtime_amount"
                                         placeholder="Enter Airtime Amount" aria-label="Airtime Amount"
-                                        id="inputGroupAmount04">
-                                    <button class="btn btn-outline-secondary" type="submit" name="service"
+                                        id="inputGroupAmount04" style="background-color: #ffffff;">
+                                    <button class="btn btn-outline-primary" type="submit" name="service"
                                         value="airtime">Buy</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Pay School-Fee</h4>
+                    <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="card shadow-sm border-success">
+                            <div class="card-body" style="background-color: #e9f9ee;">
+                                <h4 class="card-title text-success mb-3">Pay School-Fee</h4>
                                 <div class="input-group">
-                                    <select class="form-select" name="school_fee_amount" id="inputGroupSelect05">
+                                    <select class="form-select border-success" name="school_fee_amount"
+                                        id="inputGroupSelect05" style="background-color: #ffffff;">
                                         <option value="">Choose...</option>
                                         <option value="10000">10,000</option>
                                         <option value="20000">20,000</option>
                                         <option value="30000">30,000</option>
                                     </select>
-                                    <button class="btn btn-outline-secondary" type="submit" name="service"
+                                    <button class="btn btn-outline-success" type="submit" name="service"
                                         value="school_fee">Pay</button>
                                 </div>
                             </div>
@@ -126,20 +123,21 @@
                     </div>
                 </div>
             </form>
+
             <form action="pay_for_service2.php" method="post">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Buy Airtime For Friend</h4>
+                <div class="row mt-3">
+                    <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="card shadow-sm border-warning">
+                            <div class="card-body" style="background-color: #fff9e6;">
+                                <h4 class="card-title text-warning mb-3">Buy Airtime For Friend</h4>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="phonenumber"
+                                    <input type="number" class="form-control border-warning" name="phonenumber"
                                         placeholder="Enter Phone Number" aria-label="Airtime Amount"
-                                        id="inputGroupAmount04">
-                                    <input type="number" class="form-control" name="airtime_amount"
+                                        id="inputGroupAmount04" style="background-color: #ffffff;">
+                                    <input type="number" class="form-control border-warning" name="airtime_amount"
                                         placeholder="Enter Airtime Amount" aria-label="Airtime Amount"
-                                        id="inputGroupAmount04">
-                                    <button class="btn btn-outline-secondary" type="submit" name="service"
+                                        id="inputGroupAmount04" style="background-color: #ffffff;">
+                                    <button class="btn btn-outline-warning" type="submit" name="service"
                                         value="airtime">Buy</button>
                                 </div>
                             </div>
@@ -148,8 +146,9 @@
                 </div>
             </form>
             <!-- ============================================================== -->
-            <!-- End Container fluid  -->
+            <!-- End Container fluid -->
             <!-- ============================================================== -->
+
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
@@ -184,6 +183,11 @@
     <script src="src/dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="src/dist/js/custom.min.js"></script>
+    <script>
+        const options = { month: 'long', year: 'numeric' };
+        const currentDate = new Date().toLocaleDateString('en-US', options);
+        document.getElementById('currentMonthYear').value = currentDate;
+    </script>
 </body>
 
 </html>

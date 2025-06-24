@@ -96,17 +96,16 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <!-- basic table -->
-                <div class="row">
+                <div class="row mt-4">
                     <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-
+                        <div class="card shadow-lg border-0">
+                            <div class="card-body bg-light">
+                                <h4 class="card-title mb-4 text-primary">Transaction History</h4>
 
                                 <div class="table-responsive">
-
-                                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
-                                        <thead>
+                                    <table id="zero_config"
+                                        class="table table-striped table-bordered table-hover align-middle text-center">
+                                        <thead class="table-dark">
                                             <tr>
                                                 <th>No</th>
                                                 <th>Phone Number</th>
@@ -117,110 +116,87 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                            include 'connect.php'; // Include database connection
-                                            
-                                            // Ensure $class, $term, and $username are set
+                                            include 'connect.php';
+
                                             if (isset($class, $term, $user_name)) {
 
                                                 $class = trim($class);
                                                 $term = trim($term);
                                                 $user_name = trim($user_name);
 
-                                                // Fetch subjects from the database
-                                                $query = "SELECT phoneNumber, description, amount, transaction_date FROM transactions 
-                            WHERE TRIM(username)='$user_name' order by id desc";
+                                                $query = "SELECT phoneNumber, description, amount, transaction_date 
+                                          FROM transactions 
+                                          WHERE TRIM(username) = '$user_name' 
+                                          ORDER BY id DESC";
+
                                                 $result = $conn->query($query);
 
                                                 if ($result === false) {
-                                                    echo "Error: " . $conn->error; // Display SQL error if any
+                                                    echo "<tr><td colspan='5' class='text-danger'>Error: " . $conn->error . "</td></tr>";
                                                 }
                                             }
 
                                             if (isset($result) && $result->num_rows > 0) {
-                                                $no = 1; // Row counter
+                                                $no = 1;
                                                 while ($row = $result->fetch_assoc()) {
-
                                                     echo "<tr>";
                                                     echo "<td>{$no}</td>";
                                                     echo "<td>{$row['phoneNumber']}</td>";
                                                     echo "<td>{$row['description']}</td>";
-                                                    echo "<td>{$row['amount']}</td>";
-                                                    echo "<td>{$row['transaction_date']}</td>";
+                                                    echo "<td class='text-success fw-bold'>₦ {$row['amount']}</td>";
+                                                    echo "<td class='text-muted'>{$row['transaction_date']}</td>";
                                                     echo "</tr>";
                                                     $no++;
                                                 }
                                             } else {
-                                                echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
+                                                echo "<tr><td colspan='5' class='text-center text-secondary'>No transaction data found for user.</td></tr>";
                                             }
                                             ?>
                                         </tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                            <th>No</th>
-                                                <th>Subject</th>
-                                                <th>Class</th>
-                                                <th>Term</th>
-                                                <th>Score</th>
-                                                <th>Total Score</th>
-                                            </tr>
-                                        </tfoot> -->
                                     </table>
-                                    <!-- <ul class="pagination float-end">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
-                                    </ul> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End Page Content -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <?php include 'footer.php'; ?>
+
+                <!-- ============================================================== -->
+                <!-- End footer -->
+                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Container fluid  -->
+            <!-- End Page wrapper  -->
             <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <?php include 'footer.php'; ?>
+            <?php include 'profilemodal.php'; ?>
 
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+            <?php include 'wallet.php'; ?>
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Wrapper -->
         <!-- ============================================================== -->
-        <?php include 'profilemodal.php'; ?>
-
-        <?php include 'wallet.php'; ?>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- apps -->
-    <!-- apps -->
-    <script src="src/dist/js/app-style-switcher.js"></script>
-    <script src="src/dist/js/feather.min.js"></script>
-    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="src/dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="src/dist/js/custom.min.js"></script>
+        <!-- End Wrapper -->
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+        <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- apps -->
+        <!-- apps -->
+        <script src="src/dist/js/app-style-switcher.js"></script>
+        <script src="src/dist/js/feather.min.js"></script>
+        <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+        <script src="src/dist/js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="src/dist/js/custom.min.js"></script>
 </body>
 
 </html>

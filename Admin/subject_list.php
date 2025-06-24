@@ -187,7 +187,7 @@
                                                     <!-- Submit Button -->
                                                     <div class="form-group mb-3 text-center">
                                                         <button class="btn btn-primary btn-rounded" type="submit"
-                                                            name="createSubject">Create Subject</button>
+                                                            name="student_subject">Create Subject</button>
                                                     </div>
                                                 </form>
 
@@ -220,7 +220,7 @@
 
                                                 // Fetch subjects from the database
                                                 $query = "SELECT id, subjectName, class FROM student_subject 
-                                                WHERE TRIM(class)='$class'";
+                                                WHERE TRIM(class)='$class' order by subjectName asc";
                                                 $result = $conn->query($query);
 
                                                 if ($result === false) {

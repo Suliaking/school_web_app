@@ -3,8 +3,8 @@
 
 // Check if 'id' is set in the URL
 if (isset($_GET['subjectName'])) {
-    echo $subjectName = $_GET['subjectName'];
-    echo $class = $_GET['class'];
+     $subjectName = $_GET['subjectName'];
+     $class = $_GET['class'];
 }
 
 ?>
@@ -128,7 +128,7 @@ if (isset($_GET['subjectName'])) {
 
                                                 // Fetch questions from the database
                                                 $query = "SELECT question FROM questions 
-                                                WHERE TRIM(class)='$class'";
+                                                WHERE TRIM(class)='$class' AND subject='$subjectName' ";
                                                 $result = $conn->query($query);
 
                                                 if ($result === false) {
@@ -189,12 +189,12 @@ if (isset($_GET['subjectName'])) {
                 </div>
 
                 <form action="add_question.php" method="POST">
-                <input type="hidden" class="form-control" name="subject" value="<?php echo $subjectName; ?>"
-                            readonly>
-                        <input type="hidden" class="form-control" name="class" value="<?php echo $class; ?>" readonly>
+                    <input type="hidden" class="form-control" name="subject" value="<?php echo $subjectName; ?>"
+                        readonly>
+                    <input type="hidden" class="form-control" name="class" value="<?php echo $class; ?>" readonly>
                     <div class="modal-body">
 
-        
+
 
                         <div class="mb-3">
                             <label for="question" class="form-label">Question</label>

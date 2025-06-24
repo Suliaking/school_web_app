@@ -108,7 +108,7 @@
                 <!-- *************************************************************** -->
                 <div class="row">
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card border-end">
+                        <div class="card border-start border-4 border-primary shadow-sm">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div>
@@ -118,41 +118,36 @@
                                             </h2>
                                         </div>
                                         <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Airtime
-                                            Balance
-                                        </h6>
+                                            Balance</h6>
                                     </div>
                                     <div class="ms-auto mt-md-3 mt-lg-0">
-                                        <span class="opacity-7 text-muted"><i data-feather="user"></i></span>
+                                        <span class="text-primary fs-3"><i data-feather="smartphone"></i></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card border-end ">
+                        <div class="card border-start border-4 border-success shadow-sm">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div>
                                         <div class="d-inline-flex align-items-center">
                                             <h2 class="text-dark mb-1 font-weight-medium">
-                                                <label class="form-label mb-0">
-                                                    ₦<?php echo number_format($walletBalance, 2); ?>
-                                                </label>
+                                                ₦<?php echo number_format($walletBalance, 2); ?>
                                             </h2>
                                         </div>
-                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
-                                            Balance
-                                        </h6>
+                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Balance</h6>
                                     </div>
                                     <div class="ms-auto mt-md-3 mt-lg-0">
-                                        <span class="opacity-7 text-muted">₦</i></span>
+                                        <span class="text-success fs-3">₦</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card border-end ">
+                        <div class="card border-start border-4 border-info shadow-sm">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div>
@@ -161,18 +156,17 @@
                                                 <?php echo $class; ?>
                                             </h2>
                                         </div>
-                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Class
-                                        </h6>
+                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Class</h6>
                                     </div>
                                     <div class="ms-auto mt-md-3 mt-lg-0">
-                                        <span class="opacity-7 text-muted"><i data-feather="book"></i></span>
+                                        <span class="text-info fs-3"><i data-feather="book"></i></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card ">
+                        <div class="card border-start border-4 border-warning shadow-sm">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div>
@@ -182,12 +176,13 @@
                                         <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Term</h6>
                                     </div>
                                     <div class="ms-auto mt-md-3 mt-lg-0">
-                                        <span class="opacity-7 text-muted"><i data-feather="book"></i></span>
+                                        <span class="text-warning fs-3"><i data-feather="calendar"></i></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <!-- *************************************************************** -->
                 <!-- End First Cards -->
@@ -195,38 +190,42 @@
                 <!-- ============================================================== -->
                 <!-- Quote Carousel Section -->
                 <!-- ============================================================== -->
-                <div class="row mt-3">
+                <div class="row mt-4">
                     <div class="col-md-6 offset-md-3"> <!-- Centered in page -->
-                        <div class="card">
+                        <div class="card shadow-lg border-0" style="background: #f7f9fc;"> <!-- Light background -->
                             <div class="card-body">
-                                <h5 class="card-title text-center mb-3">Quote of the Moment</h5>
+                                <h5 class="card-title text-center mb-4" style="color: #2c3e50;">Quote of the Moment</h5>
                                 <div id="quoteCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                                    <div class="carousel-inner text-center">
+                                    <div class="carousel-inner text-center text-dark">
                                         <div class="carousel-item active">
                                             <blockquote class="blockquote">
-                                                <p>"Education is the most powerful weapon which you can use to change
-                                                    the
-                                                    world."</p>
-                                                <footer class="blockquote-footer mt-2">Nelson Mandela</footer>
+                                                <p class="mb-1" style="color: #34495e;">"Education is the most powerful
+                                                    weapon which you can use to change the world."</p>
+                                                <footer class="blockquote-footer mt-2 text-primary">Nelson Mandela
+                                                </footer>
                                             </blockquote>
                                         </div>
                                         <div class="carousel-item">
                                             <blockquote class="blockquote">
-                                                <p>"The expert in anything was once a beginner."</p>
-                                                <footer class="blockquote-footer mt-2">Helen Hayes</footer>
+                                                <p class="mb-1" style="color: #34495e;">"The expert in anything was once
+                                                    a beginner."</p>
+                                                <footer class="blockquote-footer mt-2 text-primary">Helen Hayes</footer>
                                             </blockquote>
                                         </div>
                                         <div class="carousel-item">
                                             <blockquote class="blockquote">
-                                                <p>"Success is not final, failure is not fatal: It is the courage to
-                                                    continue that counts."</p>
-                                                <footer class="blockquote-footer mt-2">Winston Churchill</footer>
+                                                <p class="mb-1" style="color: #34495e;">"Success is not final, failure
+                                                    is not fatal: It is the courage to continue that counts."</p>
+                                                <footer class="blockquote-footer mt-2 text-primary">Winston Churchill
+                                                </footer>
                                             </blockquote>
                                         </div>
                                         <div class="carousel-item">
                                             <blockquote class="blockquote">
-                                                <p>"Believe you can and you're halfway there."</p>
-                                                <footer class="blockquote-footer mt-2">Theodore Roosevelt</footer>
+                                                <p class="mb-1" style="color: #34495e;">"Believe you can and you're
+                                                    halfway there."</p>
+                                                <footer class="blockquote-footer mt-2 text-primary">Theodore Roosevelt
+                                                </footer>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -238,58 +237,71 @@
                 <!-- ============================================================== -->
                 <!-- End Quote Carousel Section -->
                 <!-- ============================================================== -->
+
                 <!-- *************************************************************** -->
                 <!-- Start Upcoming Events & Exams Section -->
                 <!-- *************************************************************** -->
-                <div class="row">
+                <div class="row mt-4">
                     <div class="col-lg-12 col-md-12">
-                        <div class="card">
+                        <div class="card border-0 shadow-lg" style="background-color: #f0f4f8;">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Upcoming Events & Exams</h4>
+                                <h4 class="card-title mb-4 text-center text-primary" style="font-weight: 600;">Upcoming
+                                    Events & Exams</h4>
                                 <div class="row">
+
                                     <!-- Event 1 -->
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card border shadow-sm h-100">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card h-100 border-0 shadow-sm"
+                                            style="background-color: #ffffff; border-left: 5px solid #007bff;">
                                             <div class="card-body">
-                                                <h5 class="card-title">Mathematics Exam</h5>
-                                                <p class="card-text">
-                                                    <strong>Date:</strong> June 25, 2025<br>
-                                                    <strong>Time:</strong> 9:00 AM<br>
-                                                    <strong>Class:</strong> Grade-5 to Grade-13
+                                                <h5 class="card-title text-dark">📘 Mathematics Exam</h5>
+                                                <p class="card-text text-muted">
+                                                    <strong>Date:</strong> <span class="text-dark">June 25,
+                                                        2025</span><br>
+                                                    <strong>Time:</strong> <span class="text-dark">9:00 AM</span><br>
+                                                    <strong>Class:</strong> <span class="text-dark">Grade-5 to
+                                                        Grade-13</span>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Event 2 -->
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card border shadow-sm h-100">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card h-100 border-0 shadow-sm"
+                                            style="background-color: #ffffff; border-left: 5px solid #28a745;">
                                             <div class="card-body">
-                                                <h5 class="card-title">Science Fair</h5>
-                                                <p class="card-text">
-                                                    <strong>Date:</strong> June 28, 2025<br>
-                                                    <strong>Location:</strong> School Hall<br>
-                                                    <strong>Time:</strong> 11:00 AM
+                                                <h5 class="card-title text-dark">🔬 Science Fair</h5>
+                                                <p class="card-text text-muted">
+                                                    <strong>Date:</strong> <span class="text-dark">June 28,
+                                                        2025</span><br>
+                                                    <strong>Location:</strong> <span class="text-dark">School
+                                                        Hall</span><br>
+                                                    <strong>Time:</strong> <span class="text-dark">11:00 AM</span>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Event 3 -->
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card border shadow-sm h-100">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card h-100 border-0 shadow-sm"
+                                            style="background-color: #ffffff; border-left: 5px solid #ffc107;">
                                             <div class="card-body">
-                                                <h5 class="card-title">English Literature Test</h5>
-                                                <p class="card-text">
-                                                    <strong>Date:</strong> July 2, 2025<br>
-                                                    <strong>Time:</strong> 10:30 AM<br>
-                                                    <strong>Class:</strong> Grade-5 to Grade-13
+                                                <h5 class="card-title text-dark">📖 English Literature Test</h5>
+                                                <p class="card-text text-muted">
+                                                    <strong>Date:</strong> <span class="text-dark">July 2,
+                                                        2025</span><br>
+                                                    <strong>Time:</strong> <span class="text-dark">10:30 AM</span><br>
+                                                    <strong>Class:</strong> <span class="text-dark">Grade-5 to
+                                                        Grade-13</span>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- You can add more event cards as needed -->
+                                    <!-- Add more cards below as needed -->
+
                                 </div>
                             </div>
                         </div>
@@ -492,23 +504,6 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <h4 class="card-title">Class Members</h4>
-                                    <div class="ms-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="#">Insert</a>
-                                                <a class="dropdown-item" href="#">Update</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="table-responsive">
                                     <table class="table no-wrap v-middle mb-0">
                                         <thead>
@@ -520,8 +515,6 @@
                                                 </th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted">Phone Number
                                                 </th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -536,13 +529,10 @@
 
                                                     $class = trim($class);
 
-
                                                     // Fetch subjects from the database
                                                     $query = "SELECT username,first_name,last_name, email,phoneNumber,class,term  FROM register 
-                            WHERE TRIM(class)='$class'";
+                                                    WHERE TRIM(class)='$class'";
                                                     $result = $conn->query($query);
-
-
 
                                                     if ($result === false) {
                                                         echo "Error: " . $conn->error; // Display SQL error if any

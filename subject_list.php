@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include "session.php"; ?> 
+<?php include "session.php"; ?>
 <html dir="ltr" lang="en">
 
 <head>
@@ -21,7 +21,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-</head>    
+</head>
 
 <body>
     <!-- ============================================================== -->
@@ -36,7 +36,8 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -65,7 +66,8 @@
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-muted">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-muted">Dashboard</a>
+                                    </li>
                                     <li class="breadcrumb-item text-muted active" aria-current="page">Subject List</li>
                                 </ol>
                             </nav>
@@ -94,213 +96,74 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- basic table -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Subject</th>
+                                <th>Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            include 'connect.php'; // Include database connection
+                            
+                            // Ensure $class,  are set
+                            if (isset($class)) {
 
+                                $class = trim($class);
 
-                                <div class="btn-list">
-                                    <button type="button" class="btn waves-effect waves-light btn-lg btn-primary"
-                                        data-bs-toggle="modal" data-bs-target="#create-subject-modal">Add Subject
-                                    </button>
-                                </div>
-                             
-                                <div id="create-subject-modal" class="modal fade" tabindex="-1" role="dialog"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <div class="text-center mt-2 mb-4">
-                                                    <a href="#" class="text-success">
-                                                        <span>
-                                                            <img class="me-2" src="assets/images/king-school.png" alt=""
-                                                                height="18">
-                                                            <img src="assets/images/king-school-text.png" alt="" height="18">
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                
-            
-                                                    <!-- Profile Picture Upload Section -->
-                                                    <div class="text-center mb-3 position-relative">
-                                                        <label for="profile-pic-upload" class="position-relative">
-                                                            <img id="profile-pic-preview"
-                                                                src="<?php echo $profilePic; ?>" alt="Profile Picture"
-                                                                class="rounded-circle border border-secondary"
-                                                                width="100" height="100" style="cursor: pointer;" disabled>
-                                                        </label>
-                                                    </div>
+                                // Fetch subjects from the database
+                                $query = "SELECT id, subjectName, class FROM student_subject 
+                                WHERE TRIM(class)='$class' order by subjectName asc";
+                                $result = $conn->query($query);
 
-                                                    <!-- Profile Edit Form -->
-                                                <form class="ps-3 pe-3" action="add_subject.php" method="POST">
-                                                    <div class="form-group mb-3">
+                                if ($result === false) {
+                                    echo "Error: " . $conn->error; // Display SQL error if any
+                                }
+                            }
 
-                                                        <input class="form-control" type="text" name="username"
-                                                            id="username" required hidden
-                                                            value=" <?php echo $username; ?> ">
-                                                            
-                                                    </div>
-
-                                                    <div class="form-group mb-3">
-                                                        <div class="card">
-                                                      
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group mb-3">
-                                                                        <input type="text" class="form-control"
-                                                                            name="class" value=" <?php echo $class ?> " readonly>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group mb-3">
-                                                                        <input type="text" class="form-control"
-                                                                            name="term" value=" <?php echo $term ?> " readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="card-body">
-
-                                                            <?php
-                                                            include 'connect.php'; // Include your database connection
-
-                                                            // Fetch subjects from the database
-                                                            $query = "SELECT subjectName FROM student_subject where class='$class' and term='$term'";
-                                                            $result = $conn->query($query);
-
-                                                            ?>
-
-                                                            <label class="input-group-text"
-                                                                for="inputGroupSelect01">Subject</label>
-                                                            <select class="form-select" name="subject" id="inputGroupSelect01">
-                                                                <option selected="" disabled>Select subject</option>
-                                                                <?php
-                                                                // Loop through each subject and create an option
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    echo '<option value="' . $row['subjectName'] . '">' . ($row['subjectName']) . '</option>';
-                                                                }
-                                                                ?>
-                                                            </select>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group mb-3 text-center">
-                                                        <button class="btn btn-primary btn-rounded" type="submit"
-                                                            name="save_changes">Save Changes</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div>
-                                <div class="table-responsive">
-                                
-                                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Subject</th>
-                                                <th>Class</th>
-                                                <th>Term</th>
-                                                <th>Score</th>
-                                                <th>Total Score</th>
-                                                <th>Action</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                include 'connect.php'; // Include database connection
-
-                // Ensure $class, $term, and $username are set
-                if (isset($class, $term, $user_name)) {
-
-                    $class = trim($class);
-                    $term = trim($term);
-                    $user_name = trim($user_name);
-                                
-                    // Fetch subjects from the database
-                    $query = "SELECT id,subject, class, term, score, totalScore FROM createsubject 
-                            WHERE TRIM(class)='$class' AND TRIM(term)='$term' AND TRIM(username)='$user_name'";
-                    $result = $conn->query($query);
-
-                  
-
-                    if ($result === false) {
-                        echo "Error: " . $conn->error; // Display SQL error if any
-                    }
-                }
-               
-        if (isset($result) && $result->num_rows > 0) {
-            $no = 1; // Row counter
-            while ($row = $result->fetch_assoc()) {
-             
-                echo "<tr>";
-                echo "<td>{$no}</td>";
-                echo "<td>{$row['subject']}</td>";
-                echo "<td>{$row['class']}</td>";
-                echo "<td>{$row['term']}</td>";
-                echo "<td>{$row['score']}</td>";
-                echo "<td>{$row['totalScore']}</td>";
-                echo "<td><a href='deleteSubject.php?id={$row['id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this?\")'>Delete</a></td>";
-                echo "</tr>";
-                $no++;
-            }
-        } else {
-            echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
-        }
-        ?>
-                                        </tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                            <th>No</th>
-                                                <th>Subject</th>
-                                                <th>Class</th>
-                                                <th>Term</th>
-                                                <th>Score</th>
-                                                <th>Total Score</th>
-                                            </tr>
-                                        </tfoot> -->
-                                    </table>
-                                    <!-- <ul class="pagination float-end">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
-                                    </ul> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            if (isset($result) && $result->num_rows > 0) {
+                                $no = 1; // Row counter
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>{$no}</td>";
+                                    echo "<td>{$row['subjectName']}</td>";
+                                    echo "<td>{$row['class']}</td>";
+                                    echo "</tr>";
+                                    $no++;
+                                }
+                            } else {
+                                echo "<tr><td colspan='6' class='text-center'>No Subject found for user</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <?php include 'footer.php';  ?>
-         
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-        <?php include 'profilemodal.php'; ?>
+    </div>
+    </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <?php include 'footer.php'; ?>
 
-        <?php include 'wallet.php'; ?>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+    <?php include 'profilemodal.php'; ?>
+
+    <?php include 'wallet.php'; ?>
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->

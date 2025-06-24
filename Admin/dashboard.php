@@ -412,12 +412,10 @@
                                                 <i data-feather="more-vertical"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="../school.php">signup a student</a>
-                                                <!-- <a class="dropdown-item" href="#">Update</a> -->
-                                                <!-- <a class="dropdown-item" href="#">Delete</a> -->
+                                            <a class="dropdown-item" href="../school.php?showSignupModal=true">Signup a student</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>   
                                 </div>
                                 <div class="table-responsive">
                                 <table class="table no-wrap v-middle mb-0">

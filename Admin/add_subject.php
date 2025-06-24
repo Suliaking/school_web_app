@@ -1,7 +1,7 @@
 <?php
 include '../connect.php';
 
-if (isset($_POST['createSubject'])) {
+if (isset($_POST['student_subject'])) {
     $subjectName = trim($_POST['subjectName']);
     $class = $_POST['class'];
     $username = $_POST['username'];
