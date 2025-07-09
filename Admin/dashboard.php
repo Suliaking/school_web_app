@@ -23,7 +23,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <![endif]-->
 </head>
 
 <body>
@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-7 align-self-center">
                         <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">
-                        <?php
+                            <?php
                             // Get current hour in 24-hour format
                             $hour = date("H");
                             $time_of_day = '';
@@ -79,7 +79,6 @@
                                 $time_of_day = "Evening";
                             }
                             ?>
-
                             Good <?php echo $time_of_day . ' ' . $username; ?>!
                         </h3>
                         <div class="d-flex align-items-center">
@@ -89,16 +88,6 @@
                                     </li>
                                 </ol>
                             </nav>
-                        </div>  
-                    </div>
-                    <div class="col-5 align-self-center">
-                        <div class="customize-input float-end">
-                            <select
-                                class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 23</option>
-                                <option value="1">July 23</option>
-                                <option value="2">Jun 23</option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -120,9 +109,12 @@
                                 <div class="d-flex align-items-center">
                                     <div>
                                         <div class="d-inline-flex align-items-center">
-                                            <h2 class="text-dark mb-1 font-weight-medium"><?php echo number_format($airtimeBalance, 2); ?></h2>
+                                            <h2 class="text-dark mb-1 font-weight-medium">
+                                                <?php echo number_format($airtimeBalance, 2); ?>
+                                            </h2>
                                         </div>
-                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Airtime Amount</h6>
+                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Airtime
+                                            Amount</h6>
                                     </div>
                                     <div class="ms-auto mt-md-3 mt-lg-0">
                                         <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
@@ -138,10 +130,10 @@
                                     <div>
                                         <div class="d-inline-flex align-items-center">
                                             <h2 class="text-dark mb-1 font-weight-medium">
-                                            <label class="form-label mb-0">
-                                             ₦<?php echo number_format($walletBalance, 2); ?>
-                                            </label>
-                                            </h2>                                            
+                                                <label class="form-label mb-0">
+                                                    ₦<?php echo number_format($walletBalance, 2); ?>
+                                                </label>
+                                            </h2>
                                         </div>
                                         <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
                                             Balance
@@ -162,7 +154,7 @@
                                         <div class="d-inline-flex align-items-center">
                                             <h2 class="text-dark mb-1 font-weight-medium">
                                                 <?php echo $class; ?>
-                                            </h2>                                   
+                                            </h2>
                                         </div>
                                         <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Class
                                         </h6>
@@ -180,9 +172,10 @@
                                 <div class="d-flex align-items-center">
                                     <div>
                                         <h2 class="text-dark mb-1 font-weight-medium">
-                                        <?php echo $phoneNumber; ?> 
+                                            <?php echo $phoneNumber; ?>
                                         </h2>
-                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Phone number</h6>
+                                        <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Phone number
+                                        </h6>
                                     </div>
                                     <div class="ms-auto mt-md-3 mt-lg-0">
                                         <span class="opacity-7 text-muted"><i data-feather="phone"></i></span>
@@ -412,13 +405,14 @@
                                                 <i data-feather="more-vertical"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-                                            <a class="dropdown-item" href="../school.php?showSignupModal=true">Signup a student</a>
+                                                <a class="dropdown-item"
+                                                    href="../school.php?showSignupModal=true">Signup a student</a>
                                             </div>
                                         </div>
-                                    </div>   
+                                    </div>
                                 </div>
                                 <div class="table-responsive">
-                                <table class="table no-wrap v-middle mb-0">
+                                    <table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
                                                 <th class="border-0 font-14 font-weight-medium text-muted">No</th>
@@ -426,44 +420,43 @@
                                                 </th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">Class
                                                 </th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted">Phone Number</th>
-                                                
-                                             
+                                                <th class="border-0 font-14 font-weight-medium text-muted">Phone Number
+                                                </th>
+
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                
-                                            
+
+
                                                 <?php
-                include '../connect.php'; // Include database connection
+                                                include '../connect.php'; // Include database connection
+                                                
+                                                // Ensure $class, $term, and $username are set
+                                                if (isset($class)) {
 
-                // Ensure $class, $term, and $username are set
-                if (isset($class)) {
+                                                    $class = trim($class);
 
-                    $class = trim($class);
-            
-                                
-                    // Fetch subjects from the database
-                    $query = "SELECT username,first_name,last_name, email,phoneNumber,class,term  FROM register 
-                            WHERE TRIM(class)='$class'";
-                    $result = $conn->query($query);
 
-                  
+                                                    // Fetch subjects from the database
+                                                    $query = "SELECT username,first_name,last_name, email,phoneNumber,class,term  FROM register 
+                                                    WHERE TRIM(class)='$class'";
+                                                    $result = $conn->query($query);
 
-                    if ($result === false) {
-                        echo "Error: " . $conn->error; // Display SQL error if any
-                    }
-                }
-               
-        if (isset($result) && $result->num_rows > 0) {
-            $no = 1; // Row counter
-            while ($row = $result->fetch_assoc()) {
+                                                    if ($result === false) {
+                                                        echo "Error: " . $conn->error; // Display SQL error if any
+                                                    }
+                                                }
 
-                
-                echo "<tr>";
-                echo "<td>{$no}</td>";
-                echo "<td  class='border-top-0 px-2 py-4'><div class='d-flex no-block align-items-center'>
+                                                if (isset($result) && $result->num_rows > 0) {
+                                                    $no = 1; // Row counter
+                                                    while ($row = $result->fetch_assoc()) {
+
+
+                                                        echo "<tr>";
+                                                        echo "<td>{$no}</td>";
+                                                        echo "<td  class='border-top-0 px-2 py-4'><div class='d-flex no-block align-items-center'>
                                                         <div class='me-3'><img
                                                                 src='../profile_image_upload/{$row['username']}.jpg'
                                                                 alt='user' class='rounded-circle' width='45'
@@ -474,16 +467,16 @@
                                                         </div>
                                                     </div>
                                                     </td>";
-                echo "<td>{$row['class']}</td>";
-                echo "<td>{$row['phoneNumber']}</td>";
-               
-                echo "</tr>";
-                $no++;
-            }
-        } else {
-            echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
-        }
-        ?>
+                                                        echo "<td>{$row['class']}</td>";
+                                                        echo "<td>{$row['phoneNumber']}</td>";
+
+                                                        echo "</tr>";
+                                                        $no++;
+                                                    }
+                                                } else {
+                                                    echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
+                                                }
+                                                ?>
                                         </tbody>
                                         </tbody>
                                     </table>
@@ -510,7 +503,7 @@
         <!-- Profile Modal -->
         <?php include 'updateprofilemodal.php'; ?>
 
-        <?php include 'wallet.php'; ?>  
+        <?php include 'wallet.php'; ?>
 
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
@@ -554,6 +547,11 @@
             }
         });
 
+    </script>
+    <script>
+        const options = { month: 'long', year: 'numeric' };
+        const currentDate = new Date().toLocaleDateString('en-US', options);
+        document.getElementById('currentMonthYear').value = currentDate;
     </script>
 </body>
 

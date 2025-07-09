@@ -3,8 +3,8 @@
 
 // Check if 'id' is set in the URL
 if (isset($_GET['subjectName'])) {
-     $subjectName = $_GET['subjectName'];
-     $class = $_GET['class'];
+    $subjectName = $_GET['subjectName'];
+    $class = $_GET['class'];
 }
 
 ?>
@@ -76,7 +76,9 @@ if (isset($_GET['subjectName'])) {
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="dashboard.php" class="text-muted">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Questions</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Questions /
+                                        <?php echo $subjectName; ?> / <?php echo $class; ?>
+                                    </li>
                                 </ol>
                             </nav>
                         </div>
@@ -113,6 +115,12 @@ if (isset($_GET['subjectName'])) {
                                             <tr>
                                                 <th>No</th>
                                                 <th>question</th>
+                                                <th>Option A</th>
+                                                <th>Option B</th>
+                                                <th>Option C</th>
+                                                <th>Option D</th>
+                                                <th>Answer</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -120,21 +128,12 @@ if (isset($_GET['subjectName'])) {
                                             include '../connect.php'; // Include database connection
                                             
                                             // Ensure $class are set
-                                            if (isset($class, $user_name)) {
-
-                                                $class = trim($class);
-
-                                                $user_name = trim($user_name);
-
-                                                // Fetch questions from the database
-                                                $query = "SELECT question FROM questions 
-                                                WHERE TRIM(class)='$class' AND subject='$subjectName' ";
+                                            if (isset($class, $user_name, $subjectName) && !empty($class) && !empty($subjectName)) {
+                                                $query = "SELECT id, question, optionA, optionB, optionC, optionD, correct_option FROM questions 
+                                                          WHERE TRIM(class)='$class' AND subject='$subjectName'";
                                                 $result = $conn->query($query);
-
-                                                if ($result === false) {
-                                                    echo "Error: " . $conn->error; // Display SQL error if any
-                                                }
                                             }
+                                            
 
                                             if (isset($result) && $result->num_rows > 0) {
                                                 $no = 1; // Row counter
@@ -143,6 +142,25 @@ if (isset($_GET['subjectName'])) {
                                                     echo "<tr>";
                                                     echo "<td>{$no}</td>";
                                                     echo "<td>{$row['question']}</td>";
+                                                    echo "<td>{$row['optionA']}</td>";
+                                                    echo "<td>{$row['optionB']}</td>";
+                                                    echo "<td>{$row['optionC']}</td>";
+                                                    echo "<td>{$row['optionD']}</td>";
+                                                    echo "<td>{$row['correct_option']}</td>";
+                                                    echo "<td>
+                                                            <button 
+                                                                class='btn btn-warning btn-sm edit-btn' 
+                                                                data-id='{$row['id']}'
+                                                                data-question=\"" . htmlspecialchars($row['question'], ENT_QUOTES) . "\"
+                                                                data-optiona=\"" . htmlspecialchars($row['optionA'], ENT_QUOTES) . "\"
+                                                                data-optionb=\"" . htmlspecialchars($row['optionB'], ENT_QUOTES) . "\"
+                                                                data-optionc=\"" . htmlspecialchars($row['optionC'], ENT_QUOTES) . "\"
+                                                                data-optiond=\"" . htmlspecialchars($row['optionD'], ENT_QUOTES) . "\"
+                                                                data-answer='{$row['correct_option']}'
+                                                                data-bs-toggle='modal' 
+                                                                data-bs-target='#addQuestionModal'
+                                                            >Edit</button>
+                                                    </td>";
                                                     echo "</tr>";
                                                     $no++;
                                                 }
@@ -189,6 +207,9 @@ if (isset($_GET['subjectName'])) {
                 </div>
 
                 <form action="add_question.php" method="POST">
+
+                    <input type="hidden" name="id" id="question-id">
+
                     <input type="hidden" class="form-control" name="subject" value="<?php echo $subjectName; ?>"
                         readonly>
                     <input type="hidden" class="form-control" name="class" value="<?php echo $class; ?>" readonly>
@@ -198,20 +219,18 @@ if (isset($_GET['subjectName'])) {
 
                         <div class="mb-3">
                             <label for="question" class="form-label">Question</label>
-                            <textarea class="form-control" name="question" rows="3" required></textarea>
+                            <textarea class="form-control" name="question" id="edit-question" rows="3"
+                                required></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Options</label>
-                            <input type="text" class="form-control mb-2" name="optionA" placeholder="Option A" required>
-                            <input type="text" class="form-control mb-2" name="optionB" placeholder="Option B" required>
-                            <input type="text" class="form-control mb-2" name="optionC" placeholder="Option C" required>
-                            <input type="text" class="form-control mb-2" name="optionD" placeholder="Option D" required>
-                        </div>
+                        <input type="text" class="form-control mb-2" name="optionA" id="edit-optionA" required>
+                        <input type="text" class="form-control mb-2" name="optionB" id="edit-optionB" required>
+                        <input type="text" class="form-control mb-2" name="optionC" id="edit-optionC" required>
+                        <input type="text" class="form-control mb-2" name="optionD" id="edit-optionD" required>
 
                         <div class="mb-3">
                             <label for="correct_option" class="form-label">Correct Option</label>
-                            <select class="form-select" name="correct_option" required>
+                            <select class="form-select" name="correct_option" id="edit-answer" required>
                                 <option value="">Select Correct Option</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -248,5 +267,27 @@ if (isset($_GET['subjectName'])) {
     <!--Custom JavaScript -->
     <script src="../src/dist/js/custom.min.js"></script>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editButtons = document.querySelectorAll('.edit-btn');
+        editButtons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('question-id').value = this.getAttribute('data-id');
+                document.getElementById('edit-question').value = this.getAttribute('data-question');
+                document.getElementById('edit-optionA').value = this.getAttribute('data-optiona');
+                document.getElementById('edit-optionB').value = this.getAttribute('data-optionb');
+                document.getElementById('edit-optionC').value = this.getAttribute('data-optionc');
+                document.getElementById('edit-optionD').value = this.getAttribute('data-optiond');
+                document.getElementById('edit-answer').value = this.getAttribute('data-answer');
+
+                // Change modal title & button text for edit mode
+                document.getElementById('addQuestionModalLabel').textContent = 'Edit Question';
+                document.querySelector('#addQuestionModal button[type="submit"]').textContent = 'Update Question';
+            });
+        });
+    });
+</script>
+
 
 </html>

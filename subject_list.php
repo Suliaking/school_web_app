@@ -75,12 +75,8 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                            <select
-                                class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 23</option>
-                                <option value="1">July 23</option>
-                                <option value="2">Jun 23</option>
-                            </select>
+                            <input type="text" class="form-control bg-white border-0 custom-shadow custom-radius"
+                                id="currentMonthYear" readonly>
                         </div>
                     </div>
                 </div>
@@ -183,6 +179,11 @@
     <script src="src/dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="src/dist/js/custom.min.js"></script>
+    <script>
+        const options = { month: 'long', year: 'numeric' };
+        const currentDate = new Date().toLocaleDateString('en-US', options);
+        document.getElementById('currentMonthYear').value = currentDate;
+    </script>
 </body>
 
 </html>
