@@ -8,7 +8,7 @@ if (isset($_POST['service'])) {
 
     $service = $_POST['service'];
 
-    $phoneNumber;
+    $phoneNumber;  
 
     // Determine the amount and description based on the service selected
     if ($service === "airtime" && !empty($_POST['airtime_amount'])) {

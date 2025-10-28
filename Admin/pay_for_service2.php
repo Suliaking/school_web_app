@@ -41,9 +41,9 @@ if (isset($_POST['service'])) {
     }
 
     // Check if the wallet balance is sufficient
-    if ($airtimeBalance < $amount) {
+    if ($walletBalance < $amount) {
         echo "<script>
-                alert('Insufficient funds. Your wallet balance is ₦" . number_format($airtimeBalance, 2) . "');
+                alert('Insufficient funds. Your wallet balance is ₦" . number_format($walletBalance, 2) . "');
                 window.location.href = 'services.php';
               </script>";
         exit();
@@ -53,17 +53,17 @@ if (isset($_POST['service'])) {
     $transaction_date = date("d-m-Y H:i:s");
 
     //sender balance computation
-    $newairtimeBalance = $airtimeBalance - $amount;
+    $newwalletBalance = $walletBalance - $amount;
 
     $recipientBalance = '';
     $recipientUsername = '';
     // Fetch Teachers from the database
-    $query = "SELECT phoneNumber, airtimeWallet,username FROM teacher_register WHERE TRIM(phoneNumber)='$phonenumber'";
+    $query = "SELECT phoneNumber, wallet,username FROM teacher_register WHERE TRIM(phoneNumber)='$phonenumber'";
     $result = $conn->query($query);
 
     if ($result && $result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        $recipientBalance = $user['airtimeWallet'];
+        $recipientBalance = $user['wallet'];
         $recipientUsername = $user['username'];
 
         // proceed with updating balances...
@@ -77,7 +77,7 @@ if (isset($_POST['service'])) {
     $description = "Airtime Purchase to " . $phoneNumber;
 
     // --- STEP 1: Subtract the amount from the user's wallet in the register table ---
-    $updateQuery = "UPDATE teacher_register SET airtimeWallet = '$newairtimeBalance' WHERE username = '$user_name'";
+    $updateQuery = "UPDATE teacher_register SET wallet = '$newwalletBalance' WHERE username = '$user_name'";
     $updateResult = $conn->query($updateQuery);
 
     if (!$updateResult) {
