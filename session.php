@@ -19,7 +19,7 @@ if (isset($_SESSION['username'])) {
 
 
     // Select only the needed details from the database
-    $sql_query = "SELECT email, first_name, last_name, phoneNumber, class, term, username, wallet, airtimeWallet FROM register WHERE username = '$username'";
+    $sql_query = "SELECT email, first_name, last_name, phoneNumber, class, term, username, wallet, airtimeWallet, password FROM register WHERE username = '$username'";
     $result = $conn->query($sql_query);
 
     if ($result && $result->num_rows === 1) {
@@ -34,7 +34,7 @@ if (isset($_SESSION['username'])) {
         $walletBalance = $userDetails["wallet"];
         $airtimeBalance = $userDetails["airtimeWallet"];
         $password = $userDetails["password"];
-
+        
     } else {
         echo "User not found!";
     }

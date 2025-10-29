@@ -496,7 +496,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-warning" name="update" >Update</button>
+                                <button type="submit" class="btn btn-warning" name="update">Update</button>
                             </div>
 
                         </form>
@@ -537,8 +537,6 @@
                                                 </th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted">Phone Number
                                                 </th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
