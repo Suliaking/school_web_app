@@ -10,6 +10,7 @@ if (isset($_POST['service'])) {
     $service = $_POST['service'];
 
     $phonenumber = $_POST['phonenumber'];
+
     // Determine the amount and description based on the service selected
     if ($service === "airtime" && !empty($_POST['airtime_amount'])) {
         $amount = floatval($_POST['airtime_amount']);
@@ -57,13 +58,14 @@ if (isset($_POST['service'])) {
 
     $recipientBalance = '';
     $recipientUsername = '';
+
     // Fetch Teachers from the database
-    $query = "SELECT phoneNumber, wallet,username FROM teacher_register WHERE TRIM(phoneNumber)='$phonenumber'";
+    $query = "SELECT phoneNumber, airtimeWallet, username FROM teacher_register WHERE TRIM(phoneNumber)='$phonenumber'";
     $result = $conn->query($query);
 
     if ($result && $result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        $recipientBalance = $user['wallet'];
+        $recipientBalance = $user['airtimeWallet'];
         $recipientUsername = $user['username'];
 
         // proceed with updating balances...

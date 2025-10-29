@@ -219,10 +219,6 @@ echo '
                             <i data-feather="user" class="svg-icon me-2 ms-1"></i>
                             My Profile
                         </a>
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateprofilemodal">
-                            <i data-feather="user" class="svg-icon me-2 ms-1"></i>
-                            Update Profile
-                        </a>
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#wallet-modal">
                             <i data-feather="credit-card" class="svg-icon me-2 ms-1"></i>
                             Wallet
@@ -232,7 +228,7 @@ echo '
                             Inbox
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)">
+                        <a class="dropdown-item" href="accountSetting.php">
                             <i data-feather="settings" class="svg-icon me-2 ms-1"></i>
                             Account Setting
                         </a>

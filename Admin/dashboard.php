@@ -501,7 +501,6 @@
             <!-- ============================================================== -->
         </div>
         <!-- Profile Modal -->
-        <?php include 'updateprofilemodal.php'; ?>
 
         <?php include 'wallet.php'; ?>
 

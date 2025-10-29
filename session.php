@@ -33,6 +33,7 @@ if (isset($_SESSION['username'])) {
         $user_name = $userDetails["username"];
         $walletBalance = $userDetails["wallet"];
         $airtimeBalance = $userDetails["airtimeWallet"];
+        $password = $userDetails["password"];
 
     } else {
         echo "User not found!";
