@@ -299,85 +299,150 @@
                 <!-- End Sales Charts Section -->
                 <!-- *************************************************************** -->
                 <!-- *************************************************************** -->
-                <!-- Start Location and Earnings Charts Section -->
+                <!-- Start Class Timetable Section -->
                 <!-- *************************************************************** -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-8">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">Earning Statistics</h4>
-                                    <div class="ms-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="#">Insert</a>
-                                                <a class="dropdown-item" href="#">Update</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
+                                <h4 class="card-title mb-4">Class Timetable</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center align-middle">
+                                        <thead class="bg-primary text-white">
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>Monday</th>
+                                                <th>Tuesday</th>
+                                                <th>Wednesday</th>
+                                                <th>Thursday</th>
+                                                <th>Friday</th>
+                                                <th class="text-end">Actions</th> <!-- Right alignment -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+
+                                            include '../connect.php';
+
+                                            $class = $userDetails["class"]; // you can get this dynamically based on the logged-in teacher or class selection
+                                            
+                                            $sql = "SELECT * FROM class_timetable WHERE class = ? ORDER BY id";
+                                            $stmt = $conn->prepare($sql);
+                                            $stmt->bind_param("s", $class);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+
+                                            if (mysqli_num_rows($result) > 0) {
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    $from = $row['time_from'];
+                                                    $to = $row['time_to'];
+
+                                                    echo "<tr>";
+                                                    echo "<th>{$from} - {$to}</th>";
+                                                    echo "<td>" . $row['monday'] . "</td>";
+                                                    echo "<td>" . $row['tuesday'] . "</td>";
+                                                    echo "<td>" . $row['wednesday'] . "</td>";
+                                                    echo "<td>" . $row['thursday'] . "</td>";
+                                                    echo "<td>" . $row['friday'] . "</td>";
+                                                    echo "<td>";
+                                                    echo "<button 
+                                                            type='button' 
+                                                            class='btn btn-warning btn-sm me-2 editBtn'
+                                                            data-id='{$row['id']}'
+                                                            data-from='{$row['time_from']}'
+                                                            data-to='{$row['time_to']}'
+                                                            data-monday='{$row['monday']}'
+                                                            data-tuesday='{$row['tuesday']}'
+                                                            data-wednesday='{$row['wednesday']}'
+                                                            data-thursday='{$row['thursday']}'
+                                                            data-friday='{$row['friday']}'
+                                                            data-bs-toggle='modal' 
+                                                            data-bs-target='#updateModal'>
+                                                            Edit
+                                                        </button>";
+
+                                                    echo "<a href='delete_timetable.php?id={$row['id']}' class='btn btn-sm btn-danger' onclick=\"return confirm('Are you sure?')\">Delete</a>";
+                                                    echo "</td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='6'>No timetable available</td></tr>";
+                                            }
+
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                    <!-- Button to Trigger Modal -->
+                                    <button class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#timetableModal">
+                                        Add Timetable
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="timetableModal" tabindex="-1"
+                                        aria-labelledby="timetableModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="timetableModalLabel">Add Timetable</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+
+                                                <form action="add_timetable.php" method="POST" class="row g-3 p-3">
+
+                                                    <input type="hidden" name="class"
+                                                        value="<?php echo $userDetails["class"]; ?>">
+
+                                                    <div class="col-md-2">
+                                                        <label>From</label>
+                                                        <input type="time" name="time_from" class="form-control"
+                                                            required>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <label>To</label>
+                                                        <input type="time" name="time_to" class="form-control" required>
+                                                    </div>
+
+                                                    <?php
+                                                    $user_name = $_SESSION["username"];
+                                                    $query = "SELECT DISTINCT subjectName FROM student_subject WHERE created_by = '$user_name'";
+                                                    $result = mysqli_query($conn, $query);
+                                                    ?>
+
+                                                    <?php
+                                                    function subjectDropdown($day, $result)
+                                                    {
+                                                        echo '<div class="col-md">';
+                                                        echo '<label>' . ucfirst($day) . '</label>';
+                                                        echo '<select name="' . $day . '" class="form-control">';
+                                                        echo '<option value="">Select Subject</option>';
+
+                                                        mysqli_data_seek($result, 0); // reset pointer for reuse
+                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                            echo '<option value="' . $row['subjectName'] . '">' . $row['subjectName'] . '</option>';
+                                                        }
+
+                                                        echo '</select>';
+                                                        echo '</div>';
+                                                    }
+
+                                                    $days = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+                                                    foreach ($days as $day) {
+                                                        subjectDropdown($day, $result);
+                                                    }
+
+                                                    ?>
+
+                                                    <div class="col-md-12 d-grid mt-3">
+                                                        <button type="submit" class="btn btn-primary">Add</button>
+                                                    </div>
+
+                                                </form>
+
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pl-4 mb-5">
-                                    <div class="stats ct-charts position-relative" style="height: 315px;"></div>
-                                </div>
-                                <ul class="list-inline text-center mt-4 mb-0">
-                                    <li class="list-inline-item text-muted fst-italic">Earnings for this month</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Recent Activity</h4>
-                                <div class="mt-4 activity">
-                                    <div class="d-flex align-items-start border-left-line pb-3">
-                                        <div>
-                                            <a href="javascript:void(0)" class="btn btn-info btn-circle mb-2 btn-item">
-                                                <i data-feather="shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                        <div class="ms-3 mt-2">
-                                            <h5 class="text-dark font-weight-medium mb-2">New Product Sold!</h5>
-                                            <p class="font-14 mb-2 text-muted">John Musa just purchased <br> Cannon 5M
-                                                Camera.
-                                            </p>
-                                            <span class="font-weight-light font-14 text-muted">10 Minutes Ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-start border-left-line pb-3">
-                                        <div>
-                                            <a href="javascript:void(0)"
-                                                class="btn btn-danger btn-circle mb-2 btn-item">
-                                                <i data-feather="message-square"></i>
-                                            </a>
-                                        </div>
-                                        <div class="ms-3 mt-2">
-                                            <h5 class="text-dark font-weight-medium mb-2">New Support Ticket</h5>
-                                            <p class="font-14 mb-2 text-muted">Richardson just create support <br>
-                                                ticket</p>
-                                            <span class="font-weight-light font-14 text-muted">25 Minutes Ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-start border-left-line">
-                                        <div>
-                                            <a href="javascript:void(0)" class="btn btn-cyan btn-circle mb-2 btn-item">
-                                                <i data-feather="bell"></i>
-                                            </a>
-                                        </div>
-                                        <div class="ms-3 mt-2">
-                                            <h5 class="text-dark font-weight-medium mb-2">Notification Pending Order!
-                                            </h5>
-                                            <p class="font-14 mb-2 text-muted">One Pending order from Ryne <br> Doe</p>
-                                            <span class="font-weight-light font-14 mb-1 d-block text-muted">2 Hours
-                                                Ago</span>
-                                            <a href="javascript:void(0)"
-                                                class="font-14 border-bottom pb-1 border-info">Load More</a>
                                         </div>
                                     </div>
                                 </div>
@@ -386,8 +451,58 @@
                     </div>
                 </div>
                 <!-- *************************************************************** -->
-                <!-- End Location and Earnings Charts Section -->
+                <!-- End Class Timetable Section -->
                 <!-- *************************************************************** -->
+
+                <div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <form id="updateForm" action="update_timetable.php" method="POST" class="modal-content">
+
+                            <div class="modal-header bg-warning">
+                                <h5 class="modal-title">Update Timetable</h5>
+                                <button class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body row g-3">
+
+                                <input type="hidden" name="id" id="edit_id">
+
+                                <div class="col-md-6">
+                                    <label>From</label>
+                                    <input type="time" name="time_from" id="edit_from" class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>To</label>
+                                    <input type="time" name="time_to" id="edit_to" class="form-control">
+                                </div>
+
+                                <?php
+                                mysqli_data_seek($result, 0);
+                                $days = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+                                foreach ($days as $day) {
+                                    echo '<div class="col-md">';
+                                    echo '<label>' . ucfirst($day) . '</label>';
+                                    echo '<select name="' . $day . '" id="edit_' . $day . '" class="form-control">';
+                                    echo '<option name="subjectName" value="subjectName">Select Subject</option>';
+                                    mysqli_data_seek($result, 0);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<option value="' . $row['subjectName'] . '">' . $row['subjectName'] . '</option>';
+                                    }
+                                    echo '</select></div>';
+                                }
+                                ?>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-warning" name="update" >Update</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
                 <!-- *************************************************************** -->
                 <!-- Start Students Table -->
                 <!-- *************************************************************** -->
@@ -552,6 +667,26 @@
         const currentDate = new Date().toLocaleDateString('en-US', options);
         document.getElementById('currentMonthYear').value = currentDate;
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const editButtons = document.querySelectorAll(".editBtn");
+
+            editButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    document.getElementById("edit_id").value = button.dataset.id;
+                    document.getElementById("edit_from").value = button.dataset.from;
+                    document.getElementById("edit_to").value = button.dataset.to;
+                    document.getElementById("edit_monday").value = button.dataset.monday;
+                    document.getElementById("edit_tuesday").value = button.dataset.tuesday;
+                    document.getElementById("edit_wednesday").value = button.dataset.wednesday;
+                    document.getElementById("edit_thursday").value = button.dataset.thursday;
+                    document.getElementById("edit_friday").value = button.dataset.friday;
+                });
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>
