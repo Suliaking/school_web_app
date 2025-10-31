@@ -19,7 +19,6 @@ echo '
                         <span class="hide-menu">Academics</span>
                     </a>
                     <ul class="collapse first-level base-level-line">
-                        <li class="sidebar-item"><a href="#" class="sidebar-link">Report Card</a></li>
                         <li class="sidebar-item"><a href="subject_list.php" class="sidebar-link">Subjects</a></li>
                         <li class="sidebar-item"><a href="test.php" class="sidebar-link">Tests</a></li>
                     </ul>

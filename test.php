@@ -97,33 +97,43 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <tbody>
                                     <?php
+                                    include 'connect.php'; // make sure $conn and $userDetails are available
+                                    
+                                    $student_id = $userDetails['class']; // assuming your session stores student details
                                     $no = 1;
-                                    $sql = "SELECT DISTINCT subject FROM questions ORDER BY subject ASC";
-                                    $result = $conn->query($sql);
 
-                                    if ($result && $result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            $subject = htmlspecialchars($row['subject']); // prevent XSS
+                                    // Fetch subjects assigned to this student from student_subject
+                                    $sql = "SELECT DISTINCT subjectName FROM student_subject WHERE class = '$student_id' ORDER BY subjectName ASC";
+                                    $result = mysqli_query($conn, $sql);
+
+                                    if ($result && mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $subject = htmlspecialchars($row['subjectName']);
                                             echo "
-                                        <tr>
-                                            <td>{$no}</td>
-                                            <td>{$subject}</td>
-                                            <td>
-                                                <form action='take_test.php' method='GET' class='d-inline'>
-                                                    <input type='hidden' name='subject' value='{$subject}'>
-                                                    <button type='submit' class='btn btn-sm btn-primary'>
-                                                        Take Test
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>";
+                                                <tr>
+                                                    <td>{$no}</td>
+                                                    <td>{$subject}</td>
+                                                    <td>
+                                                        <form action='take_test.php' method='GET' class='d-inline'>
+                                                            <input type='hidden' name='subject' value='$subject'>
+                                                            <input type='hidden' name='class' value='$student_id'>
+                                                            <button type='submit' class='btn btn-sm btn-primary'>
+                                                                Take Test
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>";
                                             $no++;
                                         }
                                     } else {
-                                        echo "<tr><td colspan='3' class='text-center'>No subjects available</td></tr>";
+                                        echo "<tr><td colspan='3' class='text-center text-muted'>No subjects available</td></tr>";
                                     }
                                     ?>
+                                </tbody>
+
+
 
                                 </tbody>
                             </table>

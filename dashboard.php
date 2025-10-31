@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <?php include "session.php"; ?>
 
 <html dir="ltr" lang="en">
@@ -413,6 +414,18 @@
                 <!-- *************************************************************** -->
                 <!-- End Location and Earnings Charts Section -->
                 <!-- *************************************************************** -->
+                 
+                <?php
+                include 'connect.php';
+                
+                // get student details
+                $student_class = $userDetails["class"]; // assuming you already have this from session
+                
+                // fetch timetable created for the student's class
+                $sql = "SELECT * FROM class_timetable WHERE class = '$student_class' ORDER BY time_from ASC";
+                $result = mysqli_query($conn, $sql);
+                ?>
+
                 <!-- *************************************************************** -->
                 <!-- Start Class Timetable Section -->
                 <!-- *************************************************************** -->
@@ -434,58 +447,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th>9:00 - 10:00</th>
-                                                <td>Mathematics</td>
-                                                <td>English</td>
-                                                <td>Physics</td>
-                                                <td>Biology</td>
-                                                <td>Civic Education</td>
-                                            </tr>
-                                            <tr>
-                                                <th>10:00 - 11:00</th>
-                                                <td>English</td>
-                                                <td>Biology</td>
-                                                <td>Mathematics</td>
-                                                <td>Chemistry</td>
-                                                <td>Literature</td>
-                                            </tr>
-                                            <tr>
-                                                <th>11:00 - 12:00</th>
-                                                <td>Government</td>
-                                                <td>Geography</td>
-                                                <td>Chemistry</td>
-                                                <td>Physics</td>
-                                                <td>Economics</td>
-                                            </tr>
-                                            <tr class="bg-light">
-                                                <th>12:00 - 1:00</th>
-                                                <td colspan="5"><strong>Break Time</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <th>1:00 - 2:00</th>
-                                                <td>Economics</td>
-                                                <td>Literature</td>
-                                                <td>Government</td>
-                                                <td>Mathematics</td>
-                                                <td>English</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2:00 - 3:00</th>
-                                                <td>Biology</td>
-                                                <td>Fine Art</td>
-                                                <td>English</td>
-                                                <td>Geography</td>
-                                                <td>CRS</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3:00 - 4:00</th>
-                                                <td>ICT</td>
-                                                <td>CRS</td>
-                                                <td>ICT</td>
-                                                <td>Fine Art</td>
-                                                <td>French</td>
-                                            </tr>
+                                            <?php
+
+                                            include 'connect.php';
+
+                                            if (mysqli_num_rows($result) > 0) {
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    echo "<tr>";
+                                                    echo "<th>{$row['time_from']} - {$row['time_to']}</th>";
+                                                    echo "<td>{$row['monday']}</td>";
+                                                    echo "<td>{$row['tuesday']}</td>";
+                                                    echo "<td>{$row['wednesday']}</td>";
+                                                    echo "<td>{$row['thursday']}</td>";
+                                                    echo "<td>{$row['friday']}</td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo '<tr><td colspan="6" class="text-center text-muted">No timetable available for your class yet.</td></tr>';
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -496,6 +476,7 @@
                 <!-- *************************************************************** -->
                 <!-- End Class Timetable Section -->
                 <!-- *************************************************************** -->
+
 
                 <!-- *************************************************************** -->
                 <!-- Start Top Leader Table -->

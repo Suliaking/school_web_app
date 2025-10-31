@@ -192,58 +192,65 @@
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div>
-                                <div class="table-responsive">
+                                        <div class="table-responsive">
+                                            <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Subject</th>
+                                                        <th>Class</th>
+                                                        <th>Status</th>
+                                                        <th>Timer (mins)</th>
+                                                        <th>Action</th>
+                                                        <th>Create Questions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    include '../connect.php';
+                                                    if (isset($class, $user_name)) {
+                                                        $class = trim($class);
+                                                        $user_name = trim($user_name);
+                                                        $query = "SELECT id, subjectName, class, is_active, timer_minutes 
+                                                                FROM student_subject 
+                                                                WHERE TRIM(class)='$class' ORDER BY subjectName ASC";
+                                                        $result = $conn->query($query);
+                                                    }
 
-                                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Subject</th>
-                                                <th>Class</th>
-                                                <th>Action</th>
-                                                <th>Create Questions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            include '../connect.php'; // Include database connection
-                                            
-                                            // Ensure $class, and $username are set
-                                            if (isset($class, $user_name)) {
+                                                    if (isset($result) && $result->num_rows > 0) {
+                                                        $no = 1;
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            $checked = $row['is_active'] ? 'checked' : '';
+                                                            $timer = $row['timer_minutes'] ?? 0;
+                                                            echo "<tr>
+                                                                <td>{$no}</td>
+                                                                <td>{$row['subjectName']}</td>
+                                                                <td>{$row['class']}</td>
+                                                                <td>
+                                                                    <div class='form-check form-switch'>
+                                                                        <input class='form-check-input toggle-status' type='checkbox' data-id='{$row['id']}' {$checked}>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <input type='number' class='form-control timer-input' data-id='{$row['id']}' value='{$timer}' min='1'>
+                                                                </td>
+                                                                <td>
+                                                                    <a href='deleteSubject.php?id={$row['id']}' class='btn btn-danger' onclick='return confirm(\"Delete this subject?\")'>Delete</a>
+                                                                </td>
+                                                                <td>
+                                                                    <a href='questions.php?subjectName={$row['subjectName']}&class={$row['class']}' class='btn btn-primary'>View Questions</a>
+                                                                </td>
+                                                            </tr>";
+                                                            $no++;
+                                                        }
+                                                    } else {
+                                                        echo "<tr><td colspan='7' class='text-center'>No subjects found</td></tr>";
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                                $class = trim($class);
-                                                $user_name = trim($user_name);
-
-                                                // Fetch subjects from the database
-                                                $query = "SELECT id, subjectName, class FROM student_subject 
-                                                WHERE TRIM(class)='$class' order by subjectName asc";
-                                                $result = $conn->query($query);
-
-                                                if ($result === false) {
-                                                    echo "Error: " . $conn->error; // Display SQL error if any
-                                                }
-                                            }
-
-                                            if (isset($result) && $result->num_rows > 0) {
-                                                $no = 1; // Row counter
-                                                while ($row = $result->fetch_assoc()) {
-
-                                                    echo "<tr>";
-                                                    echo "<td>{$no}</td>";
-                                                    echo "<td>{$row['subjectName']}</td>";
-                                                    echo "<td>{$row['class']}</td>";
-                                                    echo "<td><a href='deleteSubject.php?id={$row['id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this?\")'>Delete</a></td>";
-                                                    echo "<td><a href='questions.php?subjectName={$row['subjectName']}&class={$row['class']}' class='btn btn-primary'>View Questions</a></td>";
-                                                    echo "</tr>";
-                                                    $no++;
-                                                }
-                                            } else {
-                                                echo "<tr><td colspan='6' class='text-center'>No data found for user</td></tr>";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -289,6 +296,35 @@
         const currentDate = new Date().toLocaleDateString('en-US', options);
         document.getElementById('currentMonthYear').value = currentDate;
     </script>
+    <script>
+$(document).ready(function() {
+    // Toggle subject ON/OFF
+    $('.toggle-status').change(function() {
+        let id = $(this).data('id');
+        let status = $(this).is(':checked') ? 1 : 0;
+
+        $.post('update_subject_settings.php', { id: id, field: 'is_active', value: status }, function(response) {
+            console.log(response);
+        });
+    });
+
+    // Update timer on change
+    $('.timer-input').on('change', function() {
+        let id = $(this).data('id');
+        let value = $(this).val();
+
+        if (value <= 0) {
+            alert('Timer must be at least 1 minute');
+            return;
+        }
+
+        $.post('update_subject_settings.php', { id: id, field: 'timer_minutes', value: value }, function(response) {
+            console.log(response);
+        });
+    });
+});
+</script>
+
 </body>
 
 </html>
