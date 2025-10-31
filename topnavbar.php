@@ -110,7 +110,7 @@ echo '
                             <i data-feather="credit-card" class="me-2"></i> Wallet
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="accountSetting.php">
                             <i data-feather="settings" class="me-2"></i> Account Setting
                         </a>
                         <div class="dropdown-divider"></div>

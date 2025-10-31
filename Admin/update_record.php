@@ -12,7 +12,7 @@ if (isset($_POST["save_changes"])) {
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
     $class = $_POST["class"];
-    $email = $_POST['email'];
+    $email = $_POST['email']; 
     $phone = $_POST['phone'];
 
     // Prepare the SQL statement with a WHERE clause
