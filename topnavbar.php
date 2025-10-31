@@ -103,9 +103,6 @@ echo '
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profile-modal">
                             <i data-feather="user" class="me-2"></i> My Profile
                         </a>
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateprofilemodal">
-                            <i data-feather="edit" class="me-2"></i> Update Profile
-                        </a>
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#wallet-modal">
                             <i data-feather="credit-card" class="me-2"></i> Wallet
                         </a>

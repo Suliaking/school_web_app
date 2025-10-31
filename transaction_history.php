@@ -97,68 +97,84 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="card shadow-lg border-0">
-                            <div class="card-body bg-light">
-                                <h4 class="card-title mb-4 text-primary">Transaction History</h4>
+                <div class="row mt-4">
+  <div class="col-12">
+    <div class="card shadow-lg border-0">
+      <div class="card-body bg-light">
+        <h4 class="card-title mb-4 text-primary">Transaction History</h4>
 
-                                <div class="table-responsive">
-                                    <table id="zero_config"
-                                        class="table table-striped table-bordered table-hover align-middle text-center">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Phone Number</th>
-                                                <th>Description</th>
-                                                <th>Amount</th>
-                                                <th>Transaction Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            include 'connect.php';
+        <div class="table-responsive">
+          <table id="zero_config" class="table table-striped table-bordered table-hover align-middle text-center">
+            <thead class="table-dark">
+              <tr>
+                <th>No</th>
+                <th>Phone Number</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Transaction Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              include 'connect.php';
 
-                                            if (isset($class, $term, $user_name)) {
+              if (isset($class, $term, $user_name)) {
+                  $class = trim($class);
+                  $term = trim($term);
+                  $user_name = trim($user_name);
 
-                                                $class = trim($class);
-                                                $term = trim($term);
-                                                $user_name = trim($user_name);
+                  $query = "SELECT phoneNumber, description, amount, transaction_date 
+                            FROM transactions 
+                            WHERE TRIM(username) = '$user_name' 
+                            ORDER BY id DESC";
 
-                                                $query = "SELECT phoneNumber, description, amount, transaction_date 
-                                          FROM transactions 
-                                          WHERE TRIM(username) = '$user_name' 
-                                          ORDER BY id DESC";
+                  $result = $conn->query($query);
 
-                                                $result = $conn->query($query);
+                  if ($result === false) {
+                      echo "<tr><td colspan='5' class='text-danger'>Error: " . $conn->error . "</td></tr>";
+                  }
+              }
 
-                                                if ($result === false) {
-                                                    echo "<tr><td colspan='5' class='text-danger'>Error: " . $conn->error . "</td></tr>";
-                                                }
-                                            }
+              if (isset($result) && $result->num_rows > 0) {
+                  $no = 1;
+                  while ($row = $result->fetch_assoc()) {
+                      $amount = floatval($row['amount']);
+                      $description = strtolower(trim($row['description']));
 
-                                            if (isset($result) && $result->num_rows > 0) {
-                                                $no = 1;
-                                                while ($row = $result->fetch_assoc()) {
-                                                    echo "<tr>";
-                                                    echo "<td>{$no}</td>";
-                                                    echo "<td>{$row['phoneNumber']}</td>";
-                                                    echo "<td>{$row['description']}</td>";
-                                                    echo "<td class='text-success fw-bold'>₦ {$row['amount']}</td>";
-                                                    echo "<td class='text-muted'>{$row['transaction_date']}</td>";
-                                                    echo "</tr>";
-                                                    $no++;
-                                                }
-                                            } else {
-                                                echo "<tr><td colspan='5' class='text-center text-secondary'>No transaction data found for user.</td></tr>";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                      // Detect debit or credit from description
+                      if (preg_match('/purchase|payment|debit|buy|sent/', $description)) {
+                          $colorClass = "text-danger fw-bold"; // Debit
+                          $prefix = "-₦";
+                      } else {
+                          $colorClass = "text-success fw-bold"; // Credit
+                          $prefix = "+₦";
+                      }
+
+                      $formattedAmount = $prefix . number_format(abs($amount), 2);
+
+                      echo "<tr>";
+                      echo "<td>{$no}</td>";
+                      echo "<td>{$row['phoneNumber']}</td>";
+                      echo "<td>{$row['description']}</td>";
+                      echo "<td class='{$colorClass}'>{$formattedAmount}</td>";
+                      echo "<td class='text-muted'>{$row['transaction_date']}</td>";
+                      echo "</tr>";
+
+                      $no++;
+                  }
+              } else {
+                  echo "<tr><td colspan='5' class='text-center text-secondary'>No transaction data found for user.</td></tr>";
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
                 <!-- ============================================================== -->
                 <!-- End Page Content -->
                 <!-- ============================================================== -->
